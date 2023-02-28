@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+aside {
+  float: left;
+  width: 20%;
+  height: 100vh;
+  background-color: antiquewhite;
+  padding: 2em;
+}
+
+.titulo, .subtitulo, .firma, .contenido {
+  border: none;
+  margin: 8px;
+  outline: none;
+}
+
+.titulo {
+  font-size: 64px;
+}
+
+.subtitulo {
+  margin-left: 8px;
+  font-size: 32px;
+  resize: none;
+}
+
+.firma {
+  margin-top: 1em;
+  text-align: right;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.contenido {
+  margin-top: 2em;
+  margin-left: 16px;
+  font-size: 20px;
+  height: 120vh;
+  resize: none;
+
+}
+
+.form-edit {
+  width: 80%;
+  padding: 2em 8em;
+  display: flex;
+  flex-direction: column;
+}
