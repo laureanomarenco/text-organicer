@@ -5,8 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LandingComponent } from './landing/landing.component';
-import { LoginComponent } from './landing/login/login.component';
-import { RegisterComponent } from './landing/register/register.component';
+
 import { NavComponent } from './nav/nav.component';
 import { UserComponent } from './nav/user/user.component';
 import { FoldersComponent } from './nav/folders/folders.component';
@@ -17,8 +16,6 @@ import { FormsModule } from "@angular/forms";
   declarations: [
     AppComponent,
     LandingComponent,
-    LoginComponent,
-    RegisterComponent,
     NavComponent,
     UserComponent,
     FoldersComponent,
