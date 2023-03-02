@@ -12,4 +12,9 @@ export class EditComponent {
     firma: "Ingrese un firma",
     contenido: "Ingrese un contenido"
   }
+
+  auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+  }
 }

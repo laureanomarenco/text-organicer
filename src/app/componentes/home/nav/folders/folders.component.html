@@ -16,13 +16,17 @@
           <fa-icon [icon]="faTrash"></fa-icon>
           <p class="ms-2">Borrar carpeta</p>
         </div>
-        <div class="d-flex p-2 pointer">
+        <div class="d-flex p-2 pointer" (click)="cambiarNombreCarpeta(folder)">
           <fa-icon [icon]="faEdit"></fa-icon>
           <p class="ms-2">Cambiar nombre</p>
         </div>
         <div class="d-flex p-2 pointer">
           <fa-icon [icon]="faShare"></fa-icon>
           <p class="ms-2">Colaboradores</p>
+        </div>
+        <div class="d-flex p-2 pointer">
+          <fa-icon [icon]="faLink"></fa-icon>
+          <p class="ms-2">Compartir</p>
         </div>
       </span>
     </div>
@@ -41,27 +45,25 @@
           <span *ngIf="modalPage === page.id" class="modal-background">
             <fa-icon (click)="toggleModalPage(page.id)" [icon]="faClose"
                  class="pointer"></fa-icon>
-        <div class="d-flex p-2 mt-2 pointer">
+        <div class="d-flex p-2 mt-2 pointer" (click)="borrarPagina(page.id)">
           <fa-icon [icon]="faTrash"></fa-icon>
           <p class="ms-2">Borrar página</p>
-        </div>
-        <div class="d-flex p-2 pointer">
-          <fa-icon [icon]="faShare"></fa-icon>
-          <p class="ms-2">Colaboradores</p>
         </div>
       </span>
         </div>
       </div>
-      <div class="page-data ms-4">
+      <div class="page-data ms-4" (click)="newPage(folder.id)">
         <fa-icon [icon]="faPlus"></fa-icon>
         <p class="page-titulo">Nueva página</p>
       </div>
     </div>
 
   </div>
-  <div class="folder-data ms-3">
-    <fa-icon [icon]="faPlus"></fa-icon>
-    <p class="folder-titulo" (click)="newFolder()">Nueva carpeta</p>
+  <div class="ms-3">
+    <div class="folder-data" (click)="newFolder()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      <p class="folder-titulo">Nueva carpeta</p>
+    </div>
   </div>
 
 </div>

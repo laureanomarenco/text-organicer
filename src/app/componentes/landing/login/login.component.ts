@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {UserPrivate} from "../../../modelos/userPrivate";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent {
   formLogin:FormGroup;
 
 
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder, private router:Router) {
     this.formLogin = formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,
@@ -27,10 +28,15 @@ export class LoginComponent {
     })
   }
 
+  invalid:boolean=false;
+
   login():void{
     let email = this.formLogin.value.email
     let password = this.formLogin.value.password
 
     console.log(email, password)
+    // #TODO enviar al back a validar
+    this.router.navigate(['/home'])
+
   }
 }

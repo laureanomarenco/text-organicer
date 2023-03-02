@@ -15,7 +15,7 @@ import { LoginComponent } from './componentes/landing/login/login.component';
 import { RegisterComponent } from './componentes/landing/register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './componentes/home/home.component';
-import {RouterModule} from "@angular/router";
+
 
 
 @NgModule({
@@ -36,8 +36,7 @@ import {RouterModule} from "@angular/router";
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

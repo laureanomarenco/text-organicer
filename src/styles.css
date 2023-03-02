@@ -92,6 +92,9 @@ aside {
   background-color: antiquewhite;
   padding: 2em;
   position: fixed;
+  box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
 }
 
 .folder {
@@ -118,7 +121,20 @@ aside {
   font-family: var(--fuenteTextos);
 }
 
+.modal-background {
+  position: absolute;
+  margin-top: -2em;
+  margin-left: 1em;
+  padding: 1em;
+  background-color: var(--blanco);
+  box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+}
+
+/*///////////////////////*/
 /* ##### PAGE EDIT ##### */
+/*///////////////////////*/
 .titulo, .subtitulo, .firma, .contenido {
   border: none;
   margin: 8px;
@@ -148,7 +164,8 @@ aside {
   font-size: 20px;
   height: 120vh;
   resize: none;
-
+  overflow: hidden;
+  min-height: 50px;
 }
 
 .form-edit {
@@ -159,13 +176,8 @@ aside {
   flex-direction: column;
 }
 
-.modal-background {
-
-  position: absolute;
-  margin-top: -2em;
-  margin-left: 1em;
-  padding: 1em;
-  background-color: var(--blanco);
+.input-folder {
+  width: 80%;
 }
 
 
@@ -173,3 +185,4 @@ aside {
 .pointer {
   cursor: pointer;
 }
+
