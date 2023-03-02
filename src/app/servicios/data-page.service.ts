@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Page} from "../modelos/page";
 import {url} from "../constants";
 
+// #TODO Excepciones servidor caído
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +28,7 @@ export class DataPageService {
     return this.http.get<Page>(url + 'page/' + id)
   }
 
+  //PARA RUTA PERSONALIZADA
   getByFolderId(idFolder:number):Observable<Array<Page>>{
     return this.http.get<Array<Page>>(url + 'page?idFolder=' + idFolder)
   }

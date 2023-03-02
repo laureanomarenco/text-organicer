@@ -3,6 +3,7 @@
 :root {
   --fuenteTextos: 'Golos Text', sans-serif;
   --fuenteTitulos: 'Unbounded', cursive;
+  --blanco: #ffffff;
 }
 
 * {
@@ -110,7 +111,7 @@ aside {
   cursor: pointer;
 }
 .folder-titulo, .page-titulo {
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
 .page-titulo {
@@ -156,4 +157,19 @@ aside {
   padding: 2em 8em;
   display: flex;
   flex-direction: column;
+}
+
+.modal-background {
+
+  position: absolute;
+  margin-top: -2em;
+  margin-left: 1em;
+  padding: 1em;
+  background-color: var(--blanco);
+}
+
+
+/* #### GENERALES #### */
+.pointer {
+  cursor: pointer;
 }

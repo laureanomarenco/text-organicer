@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {DataUserService} from "../../../servicios/data-user.service";
-import {User} from "../../../modelos/user";
+import {DataUserService} from "../../../../servicios/data-user.service";
+import {User} from "../../../../modelos/user";
 
 @Component({
   selector: 'app-user',
