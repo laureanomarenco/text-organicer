@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
-
   login:boolean = true;
-
 }

@@ -1,0 +1,57 @@
+<form [formGroup]="formRegister" class="landing-form">
+  <input type="username"
+         placeholder="Ingresá tu username"
+         class="landing-input"
+         name="username"
+         formControlName="username"
+  >
+
+  <div *ngIf="formRegister.controls['username'].errors && formRegister.controls['username'].dirty" class="alert alert-warning">
+    <p *ngIf="formRegister.controls['username'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formRegister.controls['username'].errors['minlength']">El username debe tener al menos 4 caracteres</p>
+    <p *ngIf="formRegister.controls['username'].errors['maxlength']">El username debe tener como máximo 16 caracteres</p>
+  </div>
+
+
+  <input type="email"
+         placeholder="Ingresá tu email"
+         class="landing-input"
+         name="email"
+         formControlName="email"
+  >
+
+  <div *ngIf="formRegister.controls['email'].errors && formRegister.controls['email'].dirty" class="alert alert-warning">
+    <p *ngIf="formRegister.controls['email'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formRegister.controls['email'].errors['email']">Debes ingresar un email válido</p>
+  </div>
+
+  <input type="password"
+         placeholder="Ingresá tu contraseña"
+         class="landing-input"
+         name="password"
+         formControlName="password"
+  >
+
+  <div *ngIf="formRegister.controls['password'].errors && formRegister.controls['password'].dirty" class="alert alert-warning">
+    <p *ngIf="formRegister.controls['password'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formRegister.controls['password'].errors['minlength']">La contraseña debe tener un mínimo de 8 caracteres</p>
+    <p *ngIf="formRegister.controls['password'].errors['maxlength']">La contraseña debe tener un máximo de 20 caracteres</p>
+    <!--    <p *ngIf="formLogin.controls['password'].errors['pattern']">La contraseña debe contener al menos una mayúscula, una minúscula, un número y un simbolo alfanumerico (-$%&/ etc)</p>-->
+  </div>
+
+  <input type="password"
+         placeholder="Ingresá tu contraseña nuevamente"
+         class="landing-input"
+         name="passwordAgain"
+         formControlName="passwordAgain"
+  >
+
+  <div *ngIf="formRegister.controls['passwordAgain'].errors && formRegister.controls['passwordAgain'].dirty" class="alert alert-warning">
+    <p *ngIf="formRegister.controls['passwordAgain'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formRegister.controls['passwordAgain'].errors['minlength']">La contraseña debe tener un mínimo de 8 caracteres</p>
+    <p *ngIf="formRegister.controls['passwordAgain'].errors['maxlength']">La contraseña debe tener un máximo de 20 caracteres</p>
+    <!--    <p *ngIf="formLogin.controls['password'].errors['pattern']">La contraseña debe contener al menos una mayúscula, una minúscula, un número y un simbolo alfanumerico (-$%&/ etc)</p>-->
+  </div>
+
+  <button class="landing-button" [disabled]="formRegister.invalid" (click)="register()">Registrarse</button>
+</form>

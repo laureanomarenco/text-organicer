@@ -1,0 +1,30 @@
+<form [formGroup]="formLogin" class="landing-form">
+
+  <input type="email"
+         name="email"
+         formControlName="email"
+         placeholder="Ingresá tu email"
+         class="landing-input"
+  >
+
+  <div *ngIf="formLogin.controls['email'].errors && formLogin.controls['email'].dirty" class="alert alert-warning">
+    <p *ngIf="formLogin.controls['email'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formLogin.controls['email'].errors['email']">Debes ingresar un email válido</p>
+  </div>
+
+  <input type="password"
+         name="password"
+         formControlName="password"
+         placeholder="Ingresá tu contraseña"
+         class="landing-input"
+  >
+
+  <div *ngIf="formLogin.controls['password'].errors && formLogin.controls['password'].dirty" class="alert alert-warning">
+    <p *ngIf="formLogin.controls['password'].errors['required']">Campo obligatorio</p>
+    <p *ngIf="formLogin.controls['password'].errors['minlength']">La contraseña debe tener un mínimo de 8 caracteres</p>
+    <p *ngIf="formLogin.controls['password'].errors['maxlength']">La contraseña debe tener un máximo de 20 caracteres</p>
+<!--    <p *ngIf="formLogin.controls['password'].errors['pattern']">La contraseña debe contener al menos una mayúscula, una minúscula, un número y un simbolo alfanumerico (-$%&/ etc)</p>-->
+  </div>
+
+  <button class="landing-button" [disabled]="formLogin.invalid" (click)="login()">Ingresar</button>
+</form>

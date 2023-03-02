@@ -1,0 +1,19 @@
+<div class="landing-background">
+  <hgroup class="landing-hg">
+    <h1 class="landing-title">Text OrgaNicer</h1>
+    <p class="landing-desc">Bienvenido a <strong>Text OrgaNicer</strong>, aquí podrás gestionar tus textos en la nube, creando carpetas y las páginas que quieras dentro de ellas. Además, podrás compartirlas para colaborar con tus compañeros.</p>
+  </hgroup>
+
+  <div class="landing-form-div">
+
+    <button class="login" (click)="login = true" class="landing-switch-button">Login</button>
+    <button class="register" (click)="login = false" class="landing-switch-button">Registrarse</button>
+
+   <div *ngIf="login">
+    <app-login></app-login>
+   </div>
+    <div *ngIf="!login">
+      <app-register></app-register>
+    </div>
+  </div>
+</div>

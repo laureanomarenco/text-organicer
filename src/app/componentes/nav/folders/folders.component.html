@@ -1,0 +1,28 @@
+<div class="folders-container">
+
+  <div *ngFor="let folder of folders" class="folder">
+    <div class="folder-data">
+      <fa-icon [icon]="faElilipsisVertical"></fa-icon>
+      <p class="folder-titulo" (click)="openFolder(folder.id)">{{folder.nombre}}</p>
+    </div>
+
+    <div *ngIf="open === folder.id">
+      <div *ngFor="let page of pages" class="pages-container">
+        <div *ngIf="folder.id === page.idFolder" class="page-data">
+          <fa-icon [icon]="faElilipsisVertical"></fa-icon>
+          <p class="page-titulo">{{page.titulo}}</p>
+        </div>
+      </div>
+      <div class="page-data ms-4">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        <p class="page-titulo">Nueva página</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="folder-data ms-3">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    <p class="folder-titulo">Nueva carpeta</p>
+  </div>
+
+</div>
