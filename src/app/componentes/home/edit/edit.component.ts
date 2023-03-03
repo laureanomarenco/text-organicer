@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {Page} from "../../../modelos/page";
 import {PageService} from "../../../servicios/page.service";
 import {DataPageService} from "../../../servicios/fetchs/data-page.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -43,10 +45,21 @@ export class EditComponent {
 
   onChange(event: any) {
     if(event.type === 'blur' || event.key === 'Enter'){
-      this.pageService.updatePage(this.page.id, this.page).subscribe(res => {
-       console.log(this.page)
-      })
+      this.pageService.updatePage(this.page.id, this.page)
+        .subscribe({
+          next: res => {
+          console.log(this.page)
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Error de cliente o red', err.error.message);
+              Swal.fire('Error de cliente o red', '', 'error');
+            } else {
+              console.log('Error en el servidor remoto', err.error.message);
+              Swal.fire('Error en el servidor', '', 'error');
+            }
+          }
+        })
     }
-    console.log(event)
   }
 }

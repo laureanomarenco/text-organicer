@@ -7,6 +7,7 @@ import {DataPageService} from "../../../../servicios/fetchs/data-page.service";
 import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
 import {PageService} from "../../../../servicios/page.service";
+import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
@@ -38,9 +39,22 @@ export class FoldersComponent {
 
     this.serviceFolder
       .getAllFoldersOfUser(this.userID)
-        .subscribe(res => {
+        .subscribe({
+          next: res => {
           this.folders = res
           console.log(this.folders)
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Error de cliente o red', err.error.message);
+              Swal.fire('Error de cliente o red', '', 'error');
+
+            } else {
+              console.log('Error en el servidor remoto', err.error.message);
+              Swal.fire('Error en el servidor', '', 'error');
+
+            }
+          }
         })
   }
 
@@ -81,11 +95,22 @@ export class FoldersComponent {
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Carpeta eliminada!', '', 'success')
-        this.serviceFolder.deleteFolder(id).subscribe( res => {
-          this.folders = this.folders.filter(f => f.id !== id)
+        this.serviceFolder.deleteFolder(id)
+          .subscribe({
+            next: res => {
+              this.folders = this.folders.filter(f => f.id !== id)
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
         })
       }
     })
@@ -119,9 +144,21 @@ export class FoldersComponent {
           nombre: res.value,
           public: false
         }
-        this.serviceFolder.addFolder(newFolder).subscribe(res => {
-          this.folders.push(res)
-        })
+        this.serviceFolder.addFolder(newFolder)
+          .subscribe({
+            next: res => {
+              this.folders.push(res)
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
+          })
       }
     })
 
@@ -154,11 +191,23 @@ export class FoldersComponent {
           nombre: res.value,
           public: folder.public
         }
-        this.serviceFolder.updateFolder(folder.id, upFolder).subscribe(res => {
-          this.folders = this.folders.filter(f => f.id !== upFolder.id)
-          this.folders.push(upFolder)
-          this.modalFolder = null
-        })
+        this.serviceFolder.updateFolder(folder.id, upFolder)
+          .subscribe({
+            next: res => {
+              this.folders = this.folders.filter(f => f.id !== upFolder.id)
+              this.folders.push(upFolder)
+              this.modalFolder = null
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
+          })
       }
     })
   }
@@ -173,9 +222,21 @@ export class FoldersComponent {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Página eliminada!', '', 'success')
-        this.servicePage.deletePage(id).subscribe(res => {
-          this.pages = this.pages.filter(p => p.id !== id)
-        })
+        this.servicePage.deletePage(id)
+          .subscribe({
+            next: res  => {
+              this.pages = this.pages.filter(p => p.id !== id)
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
+          })
       }
     })
 
@@ -191,9 +252,21 @@ export class FoldersComponent {
       firma: "Ingrese un firma",
       contenido: "Ingrese un contenido"
     }
-    this.servicePage.addPage(page).subscribe(res => {
-      this.pages.push(res)
-      this.modalPage = null;
-    })
+    this.servicePage.addPage(page)
+      .subscribe({
+        next: res => {
+          this.pages.push(res)
+          this.modalPage = null;
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Error de cliente o red', err.error.message);
+            Swal.fire('Error de cliente o red', '', 'error');
+          } else {
+            console.log('Error en el servidor remoto', err.error.message);
+            Swal.fire('Error en el servidor', '', 'error');
+          }
+        }
+      })
   }
 }
