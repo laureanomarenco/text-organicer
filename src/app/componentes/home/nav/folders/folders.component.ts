@@ -20,7 +20,12 @@ export class FoldersComponent {
   folders:Array<Folder>;
   pages:Array<Page>;
 
-  constructor(private serviceFolder:DataFolderService, private servicePage:DataPageService, private serviceUser:DataUserService) {}
+
+  constructor(
+    private serviceFolder:DataFolderService,
+    private servicePage:DataPageService,
+    private serviceUser:DataUserService
+  ) {}
 
   ngOnInit():void {
 
@@ -37,6 +42,10 @@ export class FoldersComponent {
         })
   }
 
+
+  selectPage(id: number){
+    this.servicePage.setSelectedPage(id)
+  }
 
   open:number;
   openFolder(id: number) {
@@ -155,9 +164,21 @@ export class FoldersComponent {
   }
 
   borrarPagina(id: number) {
-    this.servicePage.deletePage(id).subscribe(res => {
-      this.pages = this.pages.filter(p => p.id !== id)
+    Swal.fire({
+      title: 'Estás seguro que querés eliminar esta página?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Página eliminada!', '', 'success')
+        this.servicePage.deletePage(id).subscribe(res => {
+          this.pages = this.pages.filter(p => p.id !== id)
+        })
+      }
     })
+
   }
 
   newPage(idFolder: number) {

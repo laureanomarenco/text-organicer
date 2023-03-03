@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../modelos/page";
 import {url} from "../constants";
 
@@ -10,6 +10,16 @@ import {url} from "../constants";
 })
 export class DataPageService {
 
+  // pageSelected:Page = {
+  //   id: 0,
+  //   idFolder: 0,
+  //   titulo: "Ingrese un titulo",
+  //   subtitulo: "Ingrese un subtitulo",
+  //   firma: "Ingrese un firma",
+  //   contenido: "Ingrese un contenido"
+  // };
+  pageSelected: EventEmitter<Page> = new EventEmitter<Page>()
+
   constructor(private http:HttpClient) { }
 
   getHttpOptions(){
@@ -18,6 +28,12 @@ export class DataPageService {
         'content-type': 'application/json'
       })
     }
+  }
+
+  setSelectedPage(id:number){
+    this.getById(id).subscribe(res => {
+      this.pageSelected.emit(res)
+    })
   }
 
   getAll():Observable<Array<Page>>{

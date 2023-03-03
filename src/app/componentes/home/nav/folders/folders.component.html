@@ -39,7 +39,7 @@
           <div>
             <div *ngIf="folder.id === page.idFolder" class="page-data">
               <fa-icon [icon]="faElilipsisVertical" (click)="toggleModalPage(page.id)" class="px-2"></fa-icon>
-              <p class="page-titulo">{{page.titulo}}</p>
+              <p class="page-titulo" (click)="selectPage(page.id)">{{ page.titulo }}</p>
             </div>
 
           <span *ngIf="modalPage === page.id" class="modal-background">
@@ -54,7 +54,7 @@
       </div>
       <div class="page-data ms-4" (click)="newPage(folder.id)">
         <fa-icon [icon]="faPlus"></fa-icon>
-        <p class="page-titulo">Nueva página</p>
+        <i class="page-titulo">Nueva página</i>
       </div>
     </div>
 
@@ -62,7 +62,7 @@
   <div class="ms-3">
     <div class="folder-data" (click)="newFolder()">
       <fa-icon [icon]="faPlus"></fa-icon>
-      <p class="folder-titulo">Nueva carpeta</p>
+      <i class="folder-titulo">Nueva carpeta</i>
     </div>
   </div>
 
