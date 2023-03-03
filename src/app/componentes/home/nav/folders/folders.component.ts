@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import {Folder} from "../../../../modelos/folder";
-import {DataFolderService} from "../../../../servicios/data-folder.service";
+import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
 import {Page} from "../../../../modelos/page";
-import {DataPageService} from "../../../../servicios/data-page.service";
-import {DataUserService} from "../../../../servicios/data-user.service";
+import {DataPageService} from "../../../../servicios/fetchs/data-page.service";
+import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
+import {PageService} from "../../../../servicios/page.service";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
@@ -24,16 +25,17 @@ export class FoldersComponent {
   constructor(
     private serviceFolder:DataFolderService,
     private servicePage:DataPageService,
+    private pageService: PageService,
     private serviceUser:DataUserService
   ) {}
 
   ngOnInit():void {
-
     // this.serviceUser
     //   .getById(this.userID)
     //   .subscribe(res => {
     //
     //   })
+
     this.serviceFolder
       .getAllFoldersOfUser(this.userID)
         .subscribe(res => {
@@ -44,7 +46,7 @@ export class FoldersComponent {
 
 
   selectPage(id: number){
-    this.servicePage.setSelectedPage(id)
+    this.pageService.setSelectedPage(id)
   }
 
   open:number;
@@ -55,12 +57,10 @@ export class FoldersComponent {
         .getByFolderId(id)
         .subscribe(res => {
           this.pages = res
-          this.open = id
         })
+      this.open = id
     }
   }
-
-
 
   modalFolder:number;
   toggleModalFolder(id: number) {

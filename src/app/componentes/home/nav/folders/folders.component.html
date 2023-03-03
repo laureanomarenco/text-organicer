@@ -8,7 +8,6 @@
       <p class="folder-titulo" (click)="openFolder(folder.id)">{{folder.nombre}}</p>
     </div>
 
-
       <span *ngIf="modalFolder === folder.id" class="modal-background">
         <fa-icon (click)="toggleModalFolder(folder.id)" [icon]="faClose"
         class="pointer"></fa-icon>

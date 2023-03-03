@@ -36,6 +36,7 @@
     <p *ngIf="formRegister.controls['password'].errors['required']">Campo obligatorio</p>
     <p *ngIf="formRegister.controls['password'].errors['minlength']">La contraseña debe tener un mínimo de 8 caracteres</p>
     <p *ngIf="formRegister.controls['password'].errors['maxlength']">La contraseña debe tener un máximo de 20 caracteres</p>
+
     <!--    <p *ngIf="formLogin.controls['password'].errors['pattern']">La contraseña debe contener al menos una mayúscula, una minúscula, un número y un simbolo alfanumerico (-$%&/ etc)</p>-->
   </div>
 
@@ -50,6 +51,7 @@
     <p *ngIf="formRegister.controls['passwordAgain'].errors['required']">Campo obligatorio</p>
     <p *ngIf="formRegister.controls['passwordAgain'].errors['minlength']">La contraseña debe tener un mínimo de 8 caracteres</p>
     <p *ngIf="formRegister.controls['passwordAgain'].errors['maxlength']">La contraseña debe tener un máximo de 20 caracteres</p>
+    <p *ngIf="formRegister.controls['passwordAgain'].errors['notEquals']">Las contraseñas no coinciden</p>
     <!--    <p *ngIf="formLogin.controls['password'].errors['pattern']">La contraseña debe contener al menos una mayúscula, una minúscula, un número y un simbolo alfanumerico (-$%&/ etc)</p>-->
   </div>
 

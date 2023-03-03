@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { url } from "../constants";
+import { url } from "../../constants";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../modelos/user";
+import {User} from "../../modelos/user";
 
 @Injectable({
   providedIn: 'root'

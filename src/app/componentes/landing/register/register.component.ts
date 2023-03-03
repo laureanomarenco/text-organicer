@@ -12,6 +12,7 @@ export class RegisterComponent {
 
   constructor(private formBuilder:FormBuilder) {
     this.formRegister = formBuilder.group({
+
       username: ['', Validators.compose([
         Validators.required,
         Validators.minLength(4),
@@ -24,19 +25,26 @@ export class RegisterComponent {
       password: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
         // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/)
       ])],
       passwordAgain: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
+
         // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/)
       ])]
+
     })
+    this.formRegister.get('passwordAgain').setValidators(
+      CustomValidators.equals(this.formRegister.get('password'))
+    );
+      console.log()
 
   }
 
   register():void{
+    console.log(this.formRegister)
   }
 }

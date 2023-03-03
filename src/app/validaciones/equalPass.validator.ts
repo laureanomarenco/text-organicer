@@ -1,6 +1,6 @@
 import { ValidatorFn, AbstractControl} from '@angular/forms';
 
-function equalsValidator(otherControl: AbstractControl) {
+function equalsValidator(otherControl: AbstractControl): ValidatorFn{
   return (control: AbstractControl) => {
     const value: any = control.value;
     const otherValue: any = otherControl.value;

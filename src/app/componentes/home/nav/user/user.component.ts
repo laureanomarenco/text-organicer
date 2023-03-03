@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataUserService} from "../../../../servicios/data-user.service";
+import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import {User} from "../../../../modelos/user";
 
 @Component({

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import {Page} from "../../../modelos/page";
-import {ActivatedRoute} from "@angular/router";
-import {DataPageService} from "../../../servicios/data-page.service";
-import {FoldersComponent} from "../nav/folders/folders.component";
-import {BehaviorSubject} from "rxjs";
+import {PageService} from "../../../servicios/page.service";
+import {DataPageService} from "../../../servicios/fetchs/data-page.service";
+
 
 @Component({
   selector: 'app-edit',
@@ -11,14 +10,7 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent {
-  form = {
-    id: 0,
-    idFolder: 0,
-    titulo: "Ingrese un titulo",
-    subtitulo: "Ingrese un subtitulo",
-    firma: "Ingrese un firma",
-    contenido: "Ingrese un contenido"
-  }
+
 
   page: Page = {
     id: 0,
@@ -29,14 +21,12 @@ export class EditComponent {
     contenido: "Ingrese un contenido"
   };
 
-
-
   constructor(
-    private route: ActivatedRoute,
     private pageService: DataPageService,
+    private pService: PageService
 
   ) {
-    this.pageService.pageSelected.subscribe(res => {
+    this.pService.pageSelected.subscribe(res => {
       this.page = res;
     })
   }
@@ -44,8 +34,19 @@ export class EditComponent {
   ngOnInit():void {
   }
 
-  auto_grow(element) {
+
+  resizeTextarea(element) {
     element.style.height = "5px";
     element.style.height = (element.scrollHeight)+"px";
+  }
+
+
+  onChange(event: any) {
+    if(event.type === 'blur' || event.key === 'Enter'){
+      this.pageService.updatePage(this.page.id, this.page).subscribe(res => {
+       console.log(this.page)
+      })
+    }
+    console.log(event)
   }
 }

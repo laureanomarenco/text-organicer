@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Folder} from "../modelos/folder";
-import {url} from "../constants";
+import {Folder} from "../../modelos/folder";
+import {url} from "../../constants";
 
 @Injectable({
   providedIn: 'root'
@@ -19,20 +19,12 @@ export class DataFolderService {
     }
   }
 
-  // private handlerException(e: HttpErrorResponse){
-  //   if(e.error instanceof ErrorEvent){
-  //     console.error('Error en el front: ' + e.error.message)
-  //   } else {
-  //     console.error('Error en el back: ' + e.error.message + e.error.status)
-  //   }
-  // }
-
   getAll():Observable<Array<Folder>>{
     return this.http
       .get<Array<Folder>>(url + 'folder')
   }
 
-  //PARA RUTA PERSONALIZADA
+  //#TODO BACK -> PARA RUTA PERSONALIZADA
   getAllFoldersOfUser(idUser:number):Observable<Array<Folder>>{
     return this.http.get<Array<Folder>>(url + 'folder?idUser=' + idUser)
   }
