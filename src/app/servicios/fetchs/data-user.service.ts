@@ -27,6 +27,11 @@ export class DataUserService {
     return this.http.get<User>(url + 'user/' + id)
   }
 
+  //#TODO Back -> Ruta con query
+  getByUsername(username):Observable<User> {
+    return  this.http.get<User>(url + 'user?username=' + username )
+  }
+
   addUser(user:User):Observable<User>{
     return this.http
       .post<User>(url + 'user', user, this.getHttpOptions())

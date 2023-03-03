@@ -8,6 +8,8 @@ import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
 import {PageService} from "../../../../servicios/page.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Collaborator} from "../../../../modelos/collaborator";
+import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
@@ -27,6 +29,7 @@ export class FoldersComponent {
     private serviceFolder:DataFolderService,
     private servicePage:DataPageService,
     private pageService: PageService,
+    private collaboratorService: DataCollaboratorsService,
     private serviceUser:DataUserService
   ) {}
 
@@ -268,5 +271,49 @@ export class FoldersComponent {
           }
         }
       })
+  }
+
+  agregarColaborador(idFolder:number) {
+    Swal.fire({
+      title: "Ingrese el username de su nuevo colaborador",
+      html: `
+        <div>
+            <input type="text" id="nombre" placeholder="username">
+        </div>
+        `,
+      confirmButtonText: 'Agregar',
+      focusConfirm: false,
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      showCloseButton: true,
+      preConfirm: () => {
+        const nuevoColaborador = (Swal.getPopup().querySelector('#nombre') as HTMLInputElement).value
+
+        return nuevoColaborador
+      }
+    }).then(async (res) => {
+      if(res.isConfirmed){
+        let colaborador:Collaborator= {
+          idFolder: idFolder,
+          username: res.value,
+        }
+        this.collaboratorService.addCollaborator(colaborador)
+          .subscribe({
+            next: res => {
+              this.modalFolder = null;
+              Swal.fire('Colaborador agregado', '', 'success');
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
+          })
+      }
+    })
   }
 }

@@ -19,7 +19,7 @@
           <fa-icon [icon]="faEdit"></fa-icon>
           <p class="ms-2">Cambiar nombre</p>
         </div>
-        <div class="d-flex p-2 pointer">
+        <div class="d-flex p-2 pointer" (click)="agregarColaborador(folder.id)">
           <fa-icon [icon]="faShare"></fa-icon>
           <p class="ms-2">Colaboradores</p>
         </div>

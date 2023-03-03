@@ -18,9 +18,9 @@ export class EditComponent {
     id: 0,
     idFolder: 0,
     titulo: "Ingrese un titulo",
-    subtitulo: "Ingrese un subtitulo",
-    firma: "Ingrese un firma",
-    contenido: "Ingrese un contenido"
+    subtitulo: "Ingrese un subtitulo descriptivo del texto, recomandamos que no exceda las 3 lineas",
+    firma: "Ingrese un firma, recomendamos nombre y fecha",
+    contenido: "Ingrese el contenido, el texto tiene autoguardado por lo cual tenga cuidado al retirarse de la página."
   };
 
   constructor(

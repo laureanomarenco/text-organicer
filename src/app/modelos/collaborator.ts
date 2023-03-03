@@ -1,5 +1,6 @@
 export class Collaborator {
-  idUser: number;
+  idUser?: number;
+  username: string;
   idFolder: number;
 
   constructor() {
