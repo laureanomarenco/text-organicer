@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import {Folder} from "../../../../modelos/folder";
 import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
-import {Page} from "../../../../modelos/page";
-import {DataPageService} from "../../../../servicios/fetchs/data-page.service";
 import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
 import {EditService} from "../../../../servicios/edit.service";
@@ -11,6 +9,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Collaborator} from "../../../../modelos/collaborator";
 import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
 import {FoldersService} from "../../../../servicios/folders.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
@@ -21,10 +20,11 @@ export class FoldersComponent {
 
   //#TODO Manejo de sesión user
   // Tal vez compruebo con token, se verá en back
-  userID:number = 2;
+  userID:number = 1;
   folders:Array<Folder>;
 
   constructor(
+    private router: Router,
     private serviceFolder:DataFolderService,
     private collaboratorService: DataCollaboratorsService,
     private serviceUser:DataUserService,
@@ -59,10 +59,10 @@ export class FoldersComponent {
         })
   }
 
-
   deleteFolder(id:number) {
     Swal.fire({
       title: 'Estás seguro que querés eliminar esta carpeta?',
+      text: 'Ni tu ni los colaboradores que pueda tener está carpeta podrán volver a acceder a ella',
       showDenyButton: true,
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
@@ -73,6 +73,7 @@ export class FoldersComponent {
           .subscribe({
             next: res => {
               this.folders = this.folders.filter(f => f.id !== id)
+              this.collaboratorService.deleteColabsOfFolder(id)
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -180,6 +181,7 @@ export class FoldersComponent {
     })
   }
 
+  exists : boolean = false;
   agregarColaborador(idFolder:number) {
     Swal.fire({
       title: "Ingrese el username de su nuevo colaborador",
@@ -209,11 +211,35 @@ export class FoldersComponent {
                 idFolder: idFolder,
                 username: res[0].username,
               }
-              this.collaboratorService.addCollaborator(colaborador)
+              this.collaboratorService.getAllByFolderId(colaborador.idFolder)
                 .subscribe({
                   next: res => {
-                    this.foldersService.modalFolder = null;
-                    Swal.fire('Colaborador agregado', '', 'success');
+                    res.forEach(c => {
+                      if(colaborador.idUser === c.idUser){
+                        this.exists = true;
+                      }
+                    })
+                    if(!this.exists){
+                      this.collaboratorService.addCollaborator(colaborador)
+                        .subscribe({
+                          next: res => {
+                            this.foldersService.modalFolder = null;
+                            Swal.fire('Colaborador agregado', '', 'success');
+                          },
+                          error: (err: HttpErrorResponse) => {
+                            if (err.error instanceof Error) {
+                              console.log('Error de cliente o red', err.error.message);
+                              Swal.fire('Error de cliente o red', '', 'error');
+                            } else {
+                              console.log('Error en el servidor remoto', err.error.message);
+                              Swal.fire('Error en el servidor', '', 'error');
+                            }
+                          }
+                        })
+                    } else {
+                      this.foldersService.modalFolder = null;
+                      Swal.fire('El usuario ya es colaborador de la carpeta', '', 'error');
+                    }
                   },
                   error: (err: HttpErrorResponse) => {
                     if (err.error instanceof Error) {
@@ -241,5 +267,45 @@ export class FoldersComponent {
 
       }
     })
+  }
+
+  cambiarVisibilidad(id: number) {
+    this.serviceFolder.getById(id)
+      .subscribe({
+        next: res => {
+          let up = {
+            id: res.id,
+            idUser: res.idUser,
+            nombre: res.nombre,
+            public: true
+          }
+          this.serviceFolder.updateFolder(id, up)
+            .subscribe({
+              next: res => {
+                this.router.navigate(['/publicfolder', id]);
+              },
+              error: (err: HttpErrorResponse) => {
+                if (err.error instanceof Error) {
+                  console.log('Error de cliente o red', err.error.message);
+                  this.foldersService.modalFolder = null;
+                  Swal.fire('Error de cliente o red', '', 'error');
+                } else {
+                  console.log('Error en el servidor remoto', err.error.message);
+                  Swal.fire('Error en el servidor', '', 'error');
+                }
+              }
+            })
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Error de cliente o red', err.error.message);
+            this.foldersService.modalFolder = null;
+            Swal.fire('Error de cliente o red', '', 'error');
+          } else {
+            console.log('Error en el servidor remoto', err.error.message);
+            Swal.fire('Error en el servidor', '', 'error');
+          }
+        }
+      })
   }
 }

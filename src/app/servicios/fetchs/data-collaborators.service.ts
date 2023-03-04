@@ -41,7 +41,44 @@ export class DataCollaboratorsService {
     return this.http.get<Collaborator>(url + 'collaborator?idFolder=' + idFolder + '&idUser=' + idUser)
   }
 
-  deleteCollaborator(id): Observable<Collaborator>{
+  deleteCollaborator(id:number): Observable<Collaborator>{
     return this.http.delete<Collaborator>(url + 'collaborator/' + id)
+  }
+
+  getAllByFolderId(idFolder:number): Observable<Array<Collaborator>>{
+    return this.http.get<Array<Collaborator>>(url + 'collaborator?idFolder=' + idFolder)
+  }
+  deleteColabsOfFolder(idFolder:number){
+    this.getAllByFolderId(idFolder)
+      .subscribe({
+        next: res => {
+          res.forEach(c => {
+            this.deleteCollaborator(c.id)
+              .subscribe({
+                next: res => {},
+                error: (err: HttpErrorResponse) => {
+                  if (err.error instanceof Error) {
+                    console.log('Error de cliente o red', err.error.message);
+                    Swal.fire('Error de cliente o red', '', 'error');
+                  } else {
+                    console.log('Error en el servidor remoto', err.error.message);
+                    Swal.fire('Error en el servidor', '', 'error');
+                  }
+                }
+              })
+
+          })
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Error de cliente o red', err.error.message);
+            Swal.fire('Error de cliente o red', '', 'error');
+          } else {
+            console.log('Error en el servidor remoto', err.error.message);
+            Swal.fire('Error en el servidor', '', 'error');
+          }
+        }
+      })
+
   }
 }

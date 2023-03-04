@@ -16,6 +16,9 @@ import { LoginComponent } from './componentes/landing/login/login.component';
 import { RegisterComponent } from './componentes/landing/register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CompartidasComponent} from "./componentes/home/nav/compartidas/compartidas.component";
+import { PublicComponent } from './componentes/public/public.component';
+import { PublicNavComponent } from './componentes/public/public-nav/public-nav.component';
+import { PublicTextComponent } from './componentes/public/public-text/public-text.component';
 
 
 
@@ -31,7 +34,10 @@ import {CompartidasComponent} from "./componentes/home/nav/compartidas/compartid
     FoldersComponent,
     LoginComponent,
     RegisterComponent,
-    CompartidasComponent
+    CompartidasComponent,
+    PublicComponent,
+    PublicNavComponent,
+    PublicTextComponent
   ],
   imports: [
     BrowserModule,

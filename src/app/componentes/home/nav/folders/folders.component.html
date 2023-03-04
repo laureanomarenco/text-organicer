@@ -23,13 +23,13 @@
           <fa-icon [icon]="faShare"></fa-icon>
           <p class="ms-2">Colaboradores</p>
         </div>
-        <div class="d-flex p-2 pointer">
+<!--        [routerLink]="['/publicfolder', folder.id]"-->
+        <div class="d-flex p-2 pointer" (click)="cambiarVisibilidad(folder.id)" >
           <fa-icon [icon]="faLink"></fa-icon>
           <p class="ms-2">Compartir</p>
         </div>
       </span>
     </div>
-
 
 
     <!-- ### PAGES ### -->

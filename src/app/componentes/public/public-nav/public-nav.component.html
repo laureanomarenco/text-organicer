@@ -1,0 +1,11 @@
+<p>{{folder.nombre}}</p>
+
+
+  <div *ngFor="let page of pages" class="pages-container">
+    <div>
+      <div *ngIf="folder.id === page.idFolder" class="page-data">
+        <p class="page-titulo" (click)="foldersService.selectPage(page.id)">{{ page.titulo }}</p>
+      </div>
+    </div>
+  </div>
+

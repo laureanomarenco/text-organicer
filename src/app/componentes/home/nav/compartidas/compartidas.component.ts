@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import {Folder} from "../../../../modelos/folder";
 import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
 import {FoldersService} from "../../../../servicios/folders.service";
-import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-compartidas',
@@ -13,12 +13,12 @@ import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose
   styleUrls: ['./compartidas.component.css']
 })
 export class CompartidasComponent {
-  faElilipsisVertical = faEllipsisVertical; faPlus = faPlus; faTrash = faTrashCan; faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes
-  userID:number = 2;
+  faElilipsisVertical = faEllipsisVertical; faTrash = faTrashCan; faClose = faClose;
+  userID:number = 1;
   folders:Array<Folder> = [];
 
 
-  //#TODO FALTA EVITAR QUE SE PUEDA COMPARTIR DOS VECES CON EL MISMO USUARIO, Y BLOQUEAR LA EDICIÓN
+  //#TODO BLOQUEAR EDICIÓN DOBLE
   constructor(
     private compartidasService: DataCollaboratorsService,
     private dataFolderService: DataFolderService,
