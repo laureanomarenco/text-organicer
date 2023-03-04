@@ -4,12 +4,12 @@
   <div *ngFor="let folder of folders" class="folder">
     <div>
     <div class="folder-data">
-      <fa-icon [icon]="faElilipsisVertical" (click)="toggleModalFolder(folder.id)" class="px-2 "></fa-icon>
-      <p class="folder-titulo" (click)="openFolder(folder.id)">{{folder.nombre}}</p>
+      <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalFolder(folder.id)" class="px-2 "></fa-icon>
+      <p class="folder-titulo" (click)="foldersService.openFolder(folder.id)">{{folder.nombre}}</p>
     </div>
 
-      <span *ngIf="modalFolder === folder.id" class="modal-background">
-        <fa-icon (click)="toggleModalFolder(folder.id)" [icon]="faClose"
+      <span *ngIf="foldersService.modalFolder === folder.id" class="modal-background">
+        <fa-icon (click)="foldersService.toggleModalFolder(folder.id)" [icon]="faClose"
         class="pointer"></fa-icon>
         <div class="d-flex p-2 mt-2 pointer" (click)="deleteFolder(folder.id)">
           <fa-icon [icon]="faTrash"></fa-icon>
@@ -33,25 +33,25 @@
 
 
     <!-- ### PAGES ### -->
-    <div *ngIf="open === folder.id">
-      <div *ngFor="let page of pages" class="pages-container">
+    <div *ngIf="foldersService.open === folder.id">
+      <div *ngFor="let page of foldersService.pages" class="pages-container">
           <div>
             <div *ngIf="folder.id === page.idFolder" class="page-data">
-              <fa-icon [icon]="faElilipsisVertical" (click)="toggleModalPage(page.id)" class="px-2"></fa-icon>
-              <p class="page-titulo" (click)="selectPage(page.id)">{{ page.titulo }}</p>
+              <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalPage(page.id)" class="px-2"></fa-icon>
+              <p class="page-titulo" (click)="foldersService.selectPage(page.id)">{{ page.titulo }}</p>
             </div>
 
-          <span *ngIf="modalPage === page.id" class="modal-background">
-            <fa-icon (click)="toggleModalPage(page.id)" [icon]="faClose"
+          <span *ngIf="foldersService.modalPage === page.id" class="modal-background">
+            <fa-icon (click)="foldersService.toggleModalPage(page.id)" [icon]="faClose"
                  class="pointer"></fa-icon>
-        <div class="d-flex p-2 mt-2 pointer" (click)="borrarPagina(page.id)">
+        <div class="d-flex p-2 mt-2 pointer" (click)="foldersService.borrarPagina(page.id)">
           <fa-icon [icon]="faTrash"></fa-icon>
           <p class="ms-2">Borrar página</p>
         </div>
       </span>
         </div>
       </div>
-      <div class="page-data ms-4" (click)="newPage(folder.id)">
+      <div class="page-data ms-4" (click)="foldersService.newPage(folder.id)">
         <fa-icon [icon]="faPlus"></fa-icon>
         <i class="page-titulo">Nueva página</i>
       </div>

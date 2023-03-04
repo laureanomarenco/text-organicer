@@ -1,6 +1,6 @@
 export class Folder {
 
-  id:number;
+  id?:number;
   idUser:number;
 
   nombre:string;

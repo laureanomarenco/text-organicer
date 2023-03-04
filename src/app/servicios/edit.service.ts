@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 @Injectable({
   providedIn: 'root'
 })
-export class PageService {
+export class EditService {
   pageSelected: EventEmitter<Page> = new EventEmitter<Page>()
 
 

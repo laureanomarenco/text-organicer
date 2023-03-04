@@ -1,0 +1,43 @@
+<p class="pt-5">Compartidas con vos</p>
+<div class="folders-container">
+  <div *ngFor="let folder of folders" class="folder">
+    <div>
+      <div class="folder-data">
+        <fa-icon [icon]="faElilipsisVertical" (click)="folderService.toggleModalFolder(folder.id)" class="px-2 "></fa-icon>
+        <p class="folder-titulo" (click)="folderService.openFolder(folder.id)">{{folder.nombre}}</p>
+      </div>
+
+      <span *ngIf="folderService.modalFolder === folder.id" class="modal-background">
+        <fa-icon (click)="folderService.toggleModalFolder(folder.id)" [icon]="faClose"
+                 class="pointer"></fa-icon>
+        <div class="d-flex p-2 mt-2 pointer" (click)="borrarCollaborator(folder.id)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+          <p class="ms-2">Cerrar colaboración</p>
+        </div>
+      </span>
+    </div>
+
+
+
+    <!-- ### PAGES ### -->
+    <div *ngIf="folderService.open === folder.id">
+      <div *ngFor="let page of folderService.pages" class="pages-container">
+        <div>
+          <div *ngIf="folder.id === page.idFolder" class="page-data">
+            <fa-icon [icon]="faElilipsisVertical" (click)="folderService.toggleModalPage(page.id)" class="px-2"></fa-icon>
+            <p class="page-titulo" (click)="folderService.selectPage(page.id)">{{ page.titulo }}</p>
+          </div>
+
+          <span *ngIf="folderService.modalPage === page.id" class="modal-background">
+            <fa-icon (click)="folderService.toggleModalPage(page.id)" [icon]="faClose"
+                     class="pointer"></fa-icon>
+            <div class="d-flex p-2 mt-2 pointer" (click)="folderService.borrarPagina(page.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+              <p class="ms-2">Borrar página</p>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

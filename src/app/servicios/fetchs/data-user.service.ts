@@ -28,8 +28,8 @@ export class DataUserService {
   }
 
   //#TODO Back -> Ruta con query
-  getByUsername(username):Observable<User> {
-    return  this.http.get<User>(url + 'user?username=' + username )
+  getByUsername(username:string):Observable<User> {
+    return this.http.get<User>(url + 'user?username=' + username )
   }
 
   addUser(user:User):Observable<User>{

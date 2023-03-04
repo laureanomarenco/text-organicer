@@ -5,17 +5,16 @@ import Swal from "sweetalert2";
 import {Collaborator} from "../../modelos/collaborator";
 import {Observable} from "rxjs";
 import {url} from "../../constants";
+import {DataFolderService} from "./data-folder.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataCollaboratorsService {
 
-
-  collaborator: Collaborator;
   constructor(
     private http:HttpClient,
-    private dataUserService: DataUserService,
+
   ) { }
 
   private getHttpOptions(){
@@ -29,26 +28,20 @@ export class DataCollaboratorsService {
 
   id: number;
   addCollaborator(collaborator: Collaborator):Observable<Collaborator>{
-    this.dataUserService.getByUsername(collaborator.username)
-      .subscribe({
-        next: res => {
-          this.id= res.id
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log('Error de cliente o red', err.error.message);
-            Swal.fire('Error de cliente o red', '', 'error');
-          } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
-          }
-        }
-      })
-    this.collaborator = {
-      idUser: this.id,
-      idFolder: collaborator.idFolder,
-      username: collaborator.username
-    }
-    return this.http.post<Collaborator>(url + 'collaborator', this.collaborator,this.getHttpOptions())
+    return this.http.post<Collaborator>(url + 'collaborator', collaborator,this.getHttpOptions())
+  }
+
+  //#TODO Back -> Endpoint con query
+  getAllByUserId(idUser: number):Observable<Array<Collaborator>> {
+    return this.http.get<Array<Collaborator>>(url + 'collaborator?idUser=' + idUser)
+  }
+
+  //#TODO Back -> Endpoint con dos query
+  getColabToDelete(idFolder:number, idUser:number):Observable<Collaborator>{
+    return this.http.get<Collaborator>(url + 'collaborator?idFolder=' + idFolder + '&idUser=' + idUser)
+  }
+
+  deleteCollaborator(id): Observable<Collaborator>{
+    return this.http.delete<Collaborator>(url + 'collaborator/' + id)
   }
 }

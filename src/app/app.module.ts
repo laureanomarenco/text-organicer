@@ -15,6 +15,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './componentes/landing/login/login.component';
 import { RegisterComponent } from './componentes/landing/register/register.component';
 import {HttpClientModule} from "@angular/common/http";
+import {CompartidasComponent} from "./componentes/home/nav/compartidas/compartidas.component";
+
 
 
 
@@ -28,7 +30,8 @@ import {HttpClientModule} from "@angular/common/http";
     UserComponent,
     FoldersComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CompartidasComponent
   ],
   imports: [
     BrowserModule,

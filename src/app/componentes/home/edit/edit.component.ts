@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Page} from "../../../modelos/page";
-import {PageService} from "../../../servicios/page.service";
+import {EditService} from "../../../servicios/edit.service";
 import {DataPageService} from "../../../servicios/fetchs/data-page.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
@@ -17,15 +17,15 @@ export class EditComponent {
   page: Page = {
     id: 0,
     idFolder: 0,
-    titulo: "Ingrese un titulo",
-    subtitulo: "Ingrese un subtitulo descriptivo del texto, recomandamos que no exceda las 3 lineas",
-    firma: "Ingrese un firma, recomendamos nombre y fecha",
-    contenido: "Ingrese el contenido, el texto tiene autoguardado por lo cual tenga cuidado al retirarse de la página."
+    titulo: "¡Bienvenido!",
+    subtitulo: "Crea tus carpetas. \nEditá y organizá tus textos.",
+    firma: "textOrganicer",
+    contenido: "Para servirle"
   };
 
   constructor(
     private pageService: DataPageService,
-    private pService: PageService
+    private pService: EditService
 
   ) {
     this.pService.pageSelected.subscribe(res => {
@@ -44,7 +44,7 @@ export class EditComponent {
 
 
   onChange(event: any) {
-    if(event.type === 'blur' || event.key === 'Enter'){
+    if((event.type === 'blur' || event.key === 'Enter') && this.page.id !== 0){
       this.pageService.updatePage(this.page.id, this.page)
         .subscribe({
           next: res => {

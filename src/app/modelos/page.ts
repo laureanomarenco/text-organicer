@@ -1,5 +1,5 @@
 export class Page {
-  id:number;
+  id?:number;
   idFolder:number;
   titulo:string;
   subtitulo:string;
