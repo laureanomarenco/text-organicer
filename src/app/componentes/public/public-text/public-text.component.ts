@@ -17,7 +17,7 @@ export class PublicTextComponent {
     subtitulo: "Navega entre los textos de esta carpeta",
     firma: "textOrganicer",
     contenido: "Para servirle"
-  };;
+  };
 
   constructor(
     private pService: EditService
