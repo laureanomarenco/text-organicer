@@ -43,7 +43,7 @@ export class DataUserPrivateService {
       .delete(url + 'user_private/' + id)
   }
 
-  validateUser(user:UserPrivate):Observable<User>{
+  validateUser(user:UserPrivate){
     this.http.post<User>(url + 'user_private/validate', user, this.getHttpOptions())
   }
 }
