@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {UserPrivate} from "../../../modelos/userPrivate";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DataUserPrivateService} from "../../../servicios/fetchs/data-user-private.service";
+import {UserPrivate} from "../../../modelos/userPrivate";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ export class LoginComponent {
   formLogin:FormGroup;
 
 
-  constructor(private formBuilder:FormBuilder, private router:Router) {
+  constructor(
+    private formBuilder:FormBuilder,
+    private router:Router,
+
+    private dataUserPrivateService: DataUserPrivateService
+  ) {
     this.formLogin = formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,
@@ -30,11 +36,19 @@ export class LoginComponent {
 
   invalid:boolean=false;
 
-  login():void{
+  login(){
     let email = this.formLogin.value.email
     let password = this.formLogin.value.password
 
-    console.log(email, password)
+    let userToValidate:UserPrivate = {
+      mail: email,
+      password: password
+    }
+    this.dataUserPrivateService.validateUser(userToValidate)
+      .subscribe({
+
+      })
+
     // #TODO enviar al back a validar
     this.router.navigate(['/home'])
 

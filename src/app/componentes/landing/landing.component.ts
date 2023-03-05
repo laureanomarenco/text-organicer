@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
   login:boolean = true;
+
+  description:boolean = true;
+  ngOnInit():void {
+    if(window.innerWidth < 600){
+      this.description = false
+    }
+  }
 }

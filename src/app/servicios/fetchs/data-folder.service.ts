@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Folder} from "../../modelos/folder";
-import {url} from "../../constants";
+import {url} from "../../config/constants";
 
 @Injectable({
   providedIn: 'root'

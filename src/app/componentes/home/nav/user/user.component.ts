@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import {User} from "../../../../modelos/user";
 import {HttpErrorResponse} from "@angular/common/http";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 import Swal from "sweetalert2";
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-
+  faBars = faBars;
   users:Array<User> = []
 
   constructor(private service:DataUserService) {}
@@ -35,5 +36,17 @@ export class UserComponent {
         }
       )
 
+    if(window.innerWidth > 600){
+      const bars = document.querySelector('#bars')
+      bars.classList.add('hidden')
+    }
+  }
+
+  toggleNav() {
+    const nav = document.querySelector('#aside')
+    console.log(nav)
+    if(nav.classList.contains('open')){
+      nav.classList.remove('open')
+    } else nav.classList.add('open')
   }
 }

@@ -30,18 +30,27 @@ export class FoldersService {
   }
 
   modalFolder:number;
+  modalPage:number;
   toggleModalFolder(id: number) {
     if(this.modalFolder === id) this.modalFolder = null;
-    else this.modalFolder = id;
+    else {
+      this.modalPage = null;
+      this.modalFolder = id;
+    }
   }
 
-  modalPage:number;
   toggleModalPage(id: number) {
     if(this.modalPage === id) this.modalPage = null;
-    else this.modalPage = id;
+    else {
+      this.modalFolder = null;
+      this.modalPage = id;
+    }
   }
 
   selectPage(id: number){
+    const nav = document.querySelector('#aside')
+    nav.classList.remove('open')
+
     this.pSelect.setSelectedPage(id)
   }
   borrarPagina(id: number) {

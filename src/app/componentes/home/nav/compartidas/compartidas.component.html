@@ -1,4 +1,4 @@
-<p class="pt-5">Compartidas con vos</p>
+<p *ngIf="folders.length > 0" class="pt-5">Compartidas con vos</p>
 <div class="folders-container">
   <div *ngFor="let folder of folders" class="folder">
     <div>

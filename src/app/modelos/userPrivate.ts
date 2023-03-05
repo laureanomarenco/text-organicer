@@ -1,5 +1,5 @@
 export class UserPrivate {
-  id:number;
+  id?:number;
   mail:string;
   password:string;
 

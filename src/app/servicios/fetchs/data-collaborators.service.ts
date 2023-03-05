@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {Collaborator} from "../../modelos/collaborator";
 import {Observable} from "rxjs";
-import {url} from "../../constants";
+import {url} from "../../config/constants";
 import {DataFolderService} from "./data-folder.service";
 
 @Injectable({

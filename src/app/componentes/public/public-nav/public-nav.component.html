@@ -1,4 +1,8 @@
-<p>{{folder.nombre}}</p>
+<div class="user d-flex justify-content-between">
+  <p>{{folder.nombre}}</p>
+  <fa-icon [icon]="faBars" class="pointer" id="bars" (click)="toggleNav()"></fa-icon>
+</div>
+
 
 
   <div *ngFor="let page of pages" class="pages-container">

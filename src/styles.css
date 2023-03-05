@@ -10,8 +10,203 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--fuenteTitulos)
+  font-family: var(--fuenteTitulos);
 }
+
+/*//////////////*/
+/*    MOBILE    */
+/*//////////////*/
+@media (max-width: 600px) {
+  aside {
+    width: 100%;
+    height: 10vh;
+    background-color: antiquewhite;
+    padding: 2em;
+    position: fixed;
+    overflow: auto;
+    box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+    -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+    -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  }
+
+  .open {
+    height: 100vh;
+  }
+
+  aside::-webkit-scrollbar{
+    display: none;
+  }
+
+  .form-edit {
+    width: 100%;
+    padding: 16vh 1em 0 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .titulo, .subtitulo, .firma, .contenido {
+    border: none;
+    margin: 8px;
+    outline: none;
+  }
+
+  .titulo {
+    font-size: 32px;
+  }
+
+  .subtitulo {
+    margin-left: 8px;
+    font-size: 24px;
+    resize: none;
+    height: 20vh;
+  }
+
+  .firma {
+    margin-top: 1em;
+    text-align: right;
+    font-size: 20px;
+    font-style: italic;
+  }
+
+  .contenido-public {
+    font-family: var(--fuenteTextos);
+    font-size: 16px;
+    margin-top: 2em;
+    margin-left: 16px;
+  }
+
+  .contenido {
+    font-family: var(--fuenteTextos);
+    margin-top: 2em;
+    margin-left: 16px;
+    font-size: 20px;
+    height: 120vh;
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+  }
+
+  .landing-hg {
+    padding: 2em;
+    margin: auto;
+    background-color: rgba(240, 248, 255, 0.6);
+    border: 5px;
+    text-align: center;
+  }
+
+  .landing-form-div {
+    text-align: center;
+    margin: 4em auto;
+    padding: 2em;
+    background-color: rgba(240, 248, 255, 0.6);
+    border: 5px;
+  }
+
+  .landing-input {
+    width: 80vw;
+    padding: .5em;
+    margin: .8em;
+  }
+}
+
+/*///////////*/
+/*    WEB    */
+/*///////////*/
+@media (min-width: 600px) {
+  aside {
+    float: left;
+    width: 20%;
+    height: 100vh;
+    background-color: antiquewhite;
+    padding: 2em 1.2em;
+    position: fixed;
+    overflow: auto;
+    box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+    -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+    -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  }
+
+  aside::-webkit-scrollbar{
+    display: none;
+  }
+
+  .form-edit {
+    width: 80%;
+    margin-left: 20%;
+    padding: 2em 8em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .titulo, .subtitulo, .firma, .contenido {
+    border: none;
+    margin: 8px;
+    outline: none;
+  }
+
+  .titulo {
+    font-size: 64px;
+  }
+
+  .subtitulo {
+    margin-left: 8px;
+    font-size: 32px;
+    resize: none;
+    height: 20vh;
+  }
+
+  .firma {
+    margin-top: 1em;
+    text-align: right;
+    font-size: 24px;
+    font-style: italic;
+  }
+
+  .contenido-public {
+    font-family: var(--fuenteTextos);
+    font-size: 20px;
+    margin-top: 2em;
+    margin-left: 16px;
+    white-space: break-spaces;
+  }
+
+  .contenido {
+    font-family: var(--fuenteTextos);
+    margin-top: 2em;
+    margin-left: 16px;
+    font-size: 20px;
+    height: 120vh;
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    white-space: break-spaces;
+  }
+
+  .landing-hg {
+    padding: 2em;
+    width: 50%;
+    margin: auto;
+    background-color: rgba(240, 248, 255, 0.6);
+    border: 5px;
+    text-align: center;
+  }
+
+  .landing-form-div {
+    text-align: center;
+    margin: 4em auto;
+    padding: 2em;
+    background-color: rgba(240, 248, 255, 0.6);
+    width: 50vw;
+    border: 5px;
+  }
+
+  .landing-input {
+    width: 30vw;
+    padding: .5em;
+    margin: .8em;
+  }
+}
+
 
 /* ###### LANDING ####### */
 
@@ -24,27 +219,9 @@
   height: 100vh;
 }
 
-.landing-hg {
-  padding: 2em;
-  width: 50%;
-  margin: auto;
-  background-color: rgba(240, 248, 255, 0.6);
-  border: 5px;
-  text-align: center;
-}
-
 .landing-title {
   margin-bottom: 2vh;
   font-family: var(--fuenteTitulos);
-}
-
-.landing-form-div {
-  text-align: center;
-  margin: 4em auto;
-  padding: 2em;
-  background-color: rgba(240, 248, 255, 0.6);
-  width: 50vw;
-  border: 5px;
 }
 
 .landing-form {
@@ -52,12 +229,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.landing-input {
-  width: 30vw;
-  padding: .5em;
-  margin: .8em;
 }
 
 .landing-switch-button {
@@ -82,20 +253,10 @@
 /* ###### NAV ###### */
 
 .user {
+  margin-top: -.7em;
   margin-bottom: 4em;
 }
 
-aside {
-  float: left;
-  width: 20%;
-  height: 100vh;
-  background-color: antiquewhite;
-  padding: 2em;
-  position: fixed;
-  box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
-  -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
-  -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
-}
 
 .folder {
   display: flex;
@@ -135,54 +296,17 @@ aside {
 /*///////////////////////*/
 /* ##### PAGE EDIT ##### */
 /*///////////////////////*/
-.titulo, .subtitulo, .firma, .contenido {
-  border: none;
-  margin: 8px;
-  outline: none;
-}
 
-.titulo {
-  font-size: 64px;
-}
-
-.subtitulo {
-  margin-left: 8px;
-  font-size: 32px;
-  resize: none;
-}
-
-.firma {
-  margin-top: 1em;
-  text-align: right;
-  font-size: 24px;
-  font-style: italic;
-}
-
-.contenido {
-  margin-top: 2em;
-  margin-left: 16px;
-  font-size: 20px;
-  height: 120vh;
-  resize: none;
-  overflow: hidden;
-  min-height: 50px;
-}
-
-.form-edit {
-  width: 80%;
-  margin-left: 20%;
-  padding: 2em 8em;
-  display: flex;
-  flex-direction: column;
-}
 
 .input-folder {
   width: 80%;
 }
-
 
 /* #### GENERALES #### */
 .pointer {
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}

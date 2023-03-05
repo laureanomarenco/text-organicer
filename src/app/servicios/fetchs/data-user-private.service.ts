@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {url} from "../../constants";
+import {url} from "../../config/constants";
 import {UserPrivate} from "../../modelos/userPrivate";
+import {User} from "../../modelos/user";
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,9 @@ export class DataUserPrivateService {
   deleteUserPrivate(id:number){
     return this.http
       .delete(url + 'user_private/' + id)
+  }
+
+  validateUser(user:UserPrivate):Observable<User>{
+    this.http.post<User>(url + 'user_private/validate', user, this.getHttpOptions())
   }
 }

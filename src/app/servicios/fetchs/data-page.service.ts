@@ -2,7 +2,7 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../../modelos/page";
-import {url} from "../../constants";
+import {url} from "../../config/constants";
 
 // #TODO Excepciones servidor caído
 @Injectable({

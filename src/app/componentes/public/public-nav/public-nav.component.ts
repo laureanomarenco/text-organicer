@@ -7,6 +7,7 @@ import {DataPageService} from "../../../servicios/fetchs/data-page.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {FoldersService} from "../../../servicios/folders.service";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 
 @Component({
   selector: 'app-public-nav',
@@ -14,6 +15,7 @@ import {FoldersService} from "../../../servicios/folders.service";
   styleUrls: ['./public-nav.component.css']
 })
 export class PublicNavComponent {
+  faBars = faBars
   folder: Folder;
   pages: Array<Page>;
   constructor(
@@ -27,6 +29,11 @@ export class PublicNavComponent {
   }
 
   ngOnInit():void {
+    if(window.innerWidth > 600){
+      const bars = document.querySelector('#bars')
+      bars.classList.add('hidden')
+    }
+
     const id = +this.route.snapshot.paramMap.get('id');
 
     this.dataFolderService.getById(id)
@@ -63,5 +70,13 @@ export class PublicNavComponent {
           }
         }
       })
+  }
+
+  toggleNav() {
+    const nav = document.querySelector('#aside')
+    console.log(nav)
+    if(nav.classList.contains('open')){
+      nav.classList.remove('open')
+    } else nav.classList.add('open')
   }
 }
