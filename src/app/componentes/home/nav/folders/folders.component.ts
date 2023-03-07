@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes, faDownload } from "@fortawesome/free-solid-svg-icons";
 import {Folder} from "../../../../modelos/folder";
 import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
 import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
@@ -10,13 +10,15 @@ import {Collaborator} from "../../../../modelos/collaborator";
 import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
+
+import {Page} from "../../../../modelos/page";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
   styleUrls: ['./folders.component.css']
 })
 export class FoldersComponent {
-  faElilipsisVertical = faEllipsisVertical; faPlus = faPlus; faTrash = faTrashCan; faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes
+  faElilipsisVertical = faEllipsisVertical; faPlus = faPlus; faTrash = faTrashCan; faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes; faDownload = faDownload;
 
   //#TODO Manejo de sesión user
   // Tal vez compruebo con token, se verá en back
@@ -308,4 +310,5 @@ export class FoldersComponent {
         }
       })
   }
+
 }

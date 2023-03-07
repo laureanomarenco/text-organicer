@@ -4,6 +4,7 @@ import {Page} from "../modelos/page";
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EditService} from "./edit.service";
+import * as jsPDF from 'jspdf'
 
 @Injectable({
   providedIn: 'root'
@@ -111,4 +112,48 @@ export class FoldersService {
       })
   }
 
+  descargarPDF(id: number, nombre: string) {
+    this.servicePage
+      .getByFolderId(id)
+      .subscribe(res => {
+        const doc = new jsPDF();
+        let filename = nombre + '.pdf'
+        res.forEach(p => {
+          const pageWidth = 210;
+          const pageHeight = 297;
+          doc.setFontSize(36)
+          doc.setFont("helvetica", "normal")
+          doc.text(p.titulo, 10, 20, {lineHeightFactor: 1.5, maxWidth: pageWidth - 20})
+
+          let startY = 40;
+          doc.setFontSize(24)
+          let subLines = doc.splitTextToSize(p.subtitulo, pageWidth - 20)
+          for(let i = 0; i < subLines.length; i++) {
+            if (startY > pageHeight - 20) {
+              doc.addPage();
+              startY = 20;
+            }
+            doc.text(subLines[i], 10, startY, {lineHeightFactor: 1.5, maxWidth: pageWidth - 20})
+            startY += 10
+          }
+          startY += 10
+          doc.setFontSize(20)
+          doc.text(p.firma, 10, startY, {lineHeightFactor: 1.5,maxWidth:pageWidth - 20})
+          startY += 20
+
+          doc.setFontSize(14)
+          const contentLines = doc.splitTextToSize(p.contenido, pageWidth - 20);
+          for (let i = 0; i < contentLines.length; i++) {
+            if (startY > pageHeight - 20) {
+              doc.addPage();
+              startY = 20;
+            }
+            doc.text(contentLines[i], 10, startY, {lineHeightFactor: 1.5, maxWidth: pageWidth - 20});
+            startY += 10;
+          }
+          doc.addPage()
+        })
+        doc.save(filename)
+      })
+  }
 }

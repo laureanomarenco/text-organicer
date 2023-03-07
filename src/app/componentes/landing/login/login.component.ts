@@ -45,9 +45,9 @@ export class LoginComponent {
       password: password
     }
     this.dataUserPrivateService.validateUser(userToValidate)
-      .subscribe({
-
-      })
+      // .subscribe({
+      //
+      // })
 
     // #TODO enviar al back a validar
     this.router.navigate(['/home'])

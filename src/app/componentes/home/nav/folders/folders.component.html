@@ -4,7 +4,7 @@
   <div *ngFor="let folder of folders" class="folder">
     <div>
     <div class="folder-data">
-      <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalFolder(folder.id)" class="px-2 "></fa-icon>
+      <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalFolder(folder.id)" class="modal-icon px-2"></fa-icon>
       <p class="folder-titulo" (click)="foldersService.openFolder(folder.id)">{{folder.nombre}}</p>
     </div>
 
@@ -23,10 +23,13 @@
           <fa-icon [icon]="faShare"></fa-icon>
           <p class="ms-2">Colaboradores</p>
         </div>
-<!--        [routerLink]="['/publicfolder', folder.id]"-->
         <div class="d-flex p-2 pointer" (click)="cambiarVisibilidad(folder.id)" >
           <fa-icon [icon]="faLink"></fa-icon>
           <p class="ms-2">Compartir</p>
+        </div>
+        <div class="d-flex p-2 pointer" (click)="foldersService.descargarPDF(folder.id, folder.nombre)" >
+          <fa-icon [icon]="faDownload"></fa-icon>
+          <p class="ms-2">Descargar PDF</p>
         </div>
       </span>
     </div>
@@ -37,7 +40,7 @@
       <div *ngFor="let page of foldersService.pages" class="pages-container">
           <div>
             <div *ngIf="folder.id === page.idFolder" class="page-data">
-              <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalPage(page.id)" class="px-2"></fa-icon>
+              <fa-icon [icon]="faElilipsisVertical" (click)="foldersService.toggleModalPage(page.id)" class="px-2 modal-icon"></fa-icon>
               <p class="page-titulo" (click)="foldersService.selectPage(page.id)">{{ page.titulo }}</p>
             </div>
 
@@ -52,15 +55,15 @@
         </div>
       </div>
       <div class="page-data ms-4" (click)="foldersService.newPage(folder.id)">
-        <fa-icon [icon]="faPlus"></fa-icon>
+        <fa-icon [icon]="faPlus" class="modal-icon"></fa-icon>
         <i class="page-titulo">Nueva página</i>
       </div>
     </div>
 
   </div>
-  <div class="ms-3">
+  <div class="ms-1">
     <div class="folder-data" (click)="newFolder()">
-      <fa-icon [icon]="faPlus"></fa-icon>
+      <fa-icon [icon]="faPlus" class="modal-icon"></fa-icon>
       <i class="folder-titulo">Nueva carpeta</i>
     </div>
   </div>

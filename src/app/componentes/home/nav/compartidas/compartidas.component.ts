@@ -14,6 +14,8 @@ import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-soli
 })
 export class CompartidasComponent {
   faElilipsisVertical = faEllipsisVertical; faTrash = faTrashCan; faClose = faClose;
+
+  //#todo user
   userID:number = 1;
   folders:Array<Folder> = [];
 

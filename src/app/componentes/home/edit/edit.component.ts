@@ -20,7 +20,7 @@ export class EditComponent {
     titulo: "¡Bienvenido!",
     subtitulo: "Crea tus carpetas. \nEditá y organizá tus textos.",
     firma: "textOrganicer",
-    contenido: "Para servirle"
+    contenido: "Navega y crea tus carpetas \nEdita tus textos \nComparte"
   };
 
   constructor(
