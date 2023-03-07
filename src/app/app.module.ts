@@ -19,7 +19,7 @@ import {CompartidasComponent} from "./componentes/home/nav/compartidas/compartid
 import { PublicComponent } from './componentes/public/public.component';
 import { PublicNavComponent } from './componentes/public/public-nav/public-nav.component';
 import { PublicTextComponent } from './componentes/public/public-text/public-text.component';
-
+import { NgImageSliderModule } from 'ng-image-slider';
 
 
 
@@ -45,7 +45,8 @@ import { PublicTextComponent } from './componentes/public/public-text/public-tex
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

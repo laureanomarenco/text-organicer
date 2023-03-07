@@ -214,15 +214,6 @@
 
 /* ###### LANDING ####### */
 
-.landing-background {
-  background-image: url('../src/assets/guitarrista.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-}
-
 .landing-title {
   margin-bottom: 2vh;
   font-family: var(--fuenteTitulos);

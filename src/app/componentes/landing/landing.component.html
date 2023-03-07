@@ -1,4 +1,16 @@
-<div class="landing-background">
+<div style="position: relative;">
+
+<ng-image-slider
+  [images]="image"
+  [infinite]="true"
+  [autoSlide]="5"
+  [imageSize]="{width: '100%', height: '100%'}"
+  [showArrow]="false"
+  [animationSpeed]="3000"
+  style="pointer-events: none; width: 100%; object-fit: contain;"
+></ng-image-slider>
+<div style="position: absolute; top: 20px;">
+
   <hgroup class="landing-hg">
     <h1 class="landing-title">Text Organicer</h1>
     <p
@@ -17,4 +29,6 @@
       <app-register></app-register>
     </div>
   </div>
+
+</div>
 </div>

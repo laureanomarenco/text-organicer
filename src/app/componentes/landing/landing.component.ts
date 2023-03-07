@@ -7,6 +7,17 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
   login:boolean = true;
+  image = [{
+    image: '../../../assets/escriir.jpg',
+    thumbImage: '../../../assets/escriir.jpg'
+
+  },{
+    image: '../../../assets/libros.jpg',
+    thumbImage: '../../../assets/libros.jpg'
+  },{
+    image: '../../../assets/guitarrista.jpg',
+    thumbImage: '../../../assets/guitarrista.jpg'
+  }]
 
   description:boolean = true;
   ngOnInit():void {
