@@ -23,7 +23,7 @@
     <div *ngIf="folderService.open === folder.id">
       <div *ngFor="let page of folderService.pages" class="pages-container">
         <div>
-          <div *ngIf="folder.id === page.idFolder" class="page-data">
+          <div *ngIf="folder.id === page.id_folder" class="page-data">
             <fa-icon [icon]="faElilipsisVertical" (click)="folderService.toggleModalPage(page.id)" class="px-2"></fa-icon>
             <p class="page-titulo" (click)="folderService.selectPage(page.id)">{{ page.titulo }}</p>
           </div>

@@ -40,7 +40,7 @@ export class PublicNavComponent {
       .subscribe({
         next: res => {
           this.folder = res
-          if(this.folder.public){
+          if(this.folder.is_public){
             this.dataPageService.getByFolderId(id)
               .subscribe({
                 next: res => {

@@ -1,10 +1,10 @@
 export class Folder {
 
   id?:number;
-  idUser:number;
+  id_user:number;
 
   nombre:string;
-  public:boolean;
+  is_public:boolean;
 
   constructor() {}
 }

@@ -112,9 +112,9 @@ export class FoldersComponent {
     }).then(async (res) => {
       if(res.isConfirmed){
         let newFolder:Folder= {
-          idUser: this.userID,
+          id_user: this.userID,
           nombre: res.value,
-          public: false
+          is_public: false
         }
         this.serviceFolder.addFolder(newFolder)
           .subscribe({
@@ -158,9 +158,9 @@ export class FoldersComponent {
       if(res.isConfirmed){
         let upFolder:Folder= {
           id: folder.id,
-          idUser: folder.idUser,
+          id_user: folder.id_user,
           nombre: res.value,
-          public: folder.public
+          is_public: folder.is_public
         }
         this.serviceFolder.updateFolder(folder.id, upFolder)
           .subscribe({
@@ -277,9 +277,9 @@ export class FoldersComponent {
         next: res => {
           let up = {
             id: res.id,
-            idUser: res.idUser,
+            id_user: res.id_user,
             nombre: res.nombre,
-            public: true
+            is_public: true
           }
           this.serviceFolder.updateFolder(id, up)
             .subscribe({

@@ -44,10 +44,18 @@ export class LoginComponent {
       mail: email,
       password: password
     }
-    this.dataUserPrivateService.validateUser(userToValidate)
-      // .subscribe({
-      //
-      // })
+    // this.dataUserPrivateService.validateUser(userToValidate)
+    //   .subscribe({
+    //     next: res => {
+    //       if(res === null){
+    //         console.log("Datos incorrectos")
+    //       } else {
+    //         localStorage.setItem('user', res.username)
+    //       }
+    //     }
+    //   })
+
+
 
     // #TODO enviar al back a validar
     this.router.navigate(['/home'])

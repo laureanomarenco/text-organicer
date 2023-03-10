@@ -87,7 +87,7 @@ export class FoldersService {
   newPage(idFolder: number) {
 
     let page:Page = {
-      idFolder: idFolder,
+      id_folder: idFolder,
       titulo: "Ingrese un titulo",
       subtitulo: "Ingrese un subtitulo descriptivo del texto, recomendamos que no exceda las 3 lineas",
       firma: "Ingrese un firma, recomendamos nombre y fecha",

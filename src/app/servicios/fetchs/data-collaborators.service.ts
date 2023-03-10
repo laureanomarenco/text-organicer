@@ -33,12 +33,12 @@ export class DataCollaboratorsService {
 
   //#TODO Back -> Endpoint con query
   getAllByUserId(idUser: number):Observable<Array<Collaborator>> {
-    return this.http.get<Array<Collaborator>>(url + 'collaborator?idUser=' + idUser)
+    return this.http.get<Array<Collaborator>>(url + 'collaborator?id_user=' + idUser)
   }
 
   //#TODO Back -> Endpoint con dos query
   getColabToDelete(idFolder:number, idUser:number):Observable<Collaborator>{
-    return this.http.get<Collaborator>(url + 'collaborator?idFolder=' + idFolder + '&idUser=' + idUser)
+    return this.http.get<Collaborator>(url + 'collaborator?id_folder=' + idFolder + '&id_user=' + idUser)
   }
 
   deleteCollaborator(id:number): Observable<Collaborator>{
@@ -46,7 +46,7 @@ export class DataCollaboratorsService {
   }
 
   getAllByFolderId(idFolder:number): Observable<Array<Collaborator>>{
-    return this.http.get<Array<Collaborator>>(url + 'collaborator?idFolder=' + idFolder)
+    return this.http.get<Array<Collaborator>>(url + 'collaborator?id_folder=' + idFolder)
   }
   deleteColabsOfFolder(idFolder:number){
     this.getAllByFolderId(idFolder)

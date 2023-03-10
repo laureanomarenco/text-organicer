@@ -16,7 +16,7 @@ export class EditComponent {
 
   page: Page = {
     id: 0,
-    idFolder: 0,
+    id_folder: 0,
     titulo: "¡Bienvenido!",
     subtitulo: "Crea tus carpetas. \nEditá y organizá tus textos.",
     firma: "textOrganicer",

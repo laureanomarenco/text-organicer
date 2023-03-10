@@ -30,7 +30,7 @@ export class DataPageService {
 
   //#TODO BACK -> PARA RUTA PERSONALIZADA
   getByFolderId(idFolder:number):Observable<Array<Page>>{
-    return this.http.get<Array<Page>>(url + 'page?idFolder=' + idFolder)
+    return this.http.get<Array<Page>>(url + 'page?id_folder=' + idFolder)
   }
 
   addPage(page:Page):Observable<Page>{

@@ -80,7 +80,7 @@ export class CompartidasComponent {
           .subscribe({
             next: res => {
               console.log(res)
-              this.folders = this.folders.filter(f => f.id !== res[0].idFolder)
+              this.folders = this.folders.filter(f => f.id !== res[0].id_folder)
               this.compartidasService.deleteCollaborator(res[0].id)
                 .subscribe({
                   next: res => {

@@ -1,6 +1,6 @@
 export class Page {
   id?:number;
-  idFolder:number;
+  id_folder:number;
   titulo:string;
   subtitulo:string;
   firma:string;

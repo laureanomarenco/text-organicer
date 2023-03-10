@@ -3,6 +3,7 @@ import { url } from "../../config/constants";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../modelos/user";
+import {UserPrivate} from "../../modelos/userPrivate";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class DataUserService {
     return this.http.get<User>(url + 'user/' + id)
   }
 
-  //#TODO Back -> Ruta con query
+  //#TODO Back -> cambiar rut a user/username?username=
   getByUsername(username:string):Observable<User> {
     return this.http.get<User>(url + 'user?username=' + username )
   }
@@ -46,5 +47,7 @@ export class DataUserService {
     return this.http
       .delete(url + 'user/' + id)
   }
+
+
 }
 

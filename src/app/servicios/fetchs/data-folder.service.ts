@@ -26,7 +26,7 @@ export class DataFolderService {
 
   //#TODO BACK -> PARA RUTA PERSONALIZADA
   getAllFoldersOfUser(idUser:number):Observable<Array<Folder>>{
-    return this.http.get<Array<Folder>>(url + 'folder?idUser=' + idUser)
+    return this.http.get<Array<Folder>>(url + 'folder?id_user=' + idUser)
   }
 
   getById(id:number):Observable<Folder>{
