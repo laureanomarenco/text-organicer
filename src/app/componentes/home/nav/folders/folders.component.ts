@@ -30,7 +30,7 @@ export class FoldersComponent {
     private serviceFolder:DataFolderService,
     private collaboratorService: DataCollaboratorsService,
     private serviceUser:DataUserService,
-    public foldersService: FoldersService
+    public foldersService: FoldersService,
   ) {}
 
   ngOnInit():void {

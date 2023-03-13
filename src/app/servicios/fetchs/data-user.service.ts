@@ -33,6 +33,7 @@ export class DataUserService {
     return this.http.get<User>(url + 'user?username=' + username )
   }
 
+  //#TODO Hay que crear user y luego user private, al post de user private pasarle por params el id del user que se creó.
   addUser(user:User):Observable<User>{
     return this.http
       .post<User>(url + 'user', user, this.getHttpOptions())
