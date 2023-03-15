@@ -62,7 +62,7 @@ export class FoldersService {
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
+
       if (result.isConfirmed) {
         Swal.fire('Página eliminada!', '', 'success')
         this.servicePage.deletePage(id)
@@ -86,14 +86,13 @@ export class FoldersService {
   newPage(idFolder: number) {
 
     let page:Page = {
-      id_folder: idFolder,
       titulo: "Ingrese un titulo",
       subtitulo: "Ingrese un subtitulo descriptivo del texto, recomendamos que no exceda las 3 lineas",
       firma: "Ingrese un firma, recomendamos nombre y fecha",
       contenido: "Ingrese el contenido, el texto tiene autoguardado por lo cual tenga cuidado al retirarse de la página."
     }
 
-    this.servicePage.addPage(page)
+    this.servicePage.addPage(page, idFolder)
       .subscribe({
         next: res => {
           this.pages.push(res.data as Page)

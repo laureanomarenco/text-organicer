@@ -11,6 +11,7 @@ import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collab
 import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
 import {COLLABORATOR, OWNER} from "../../../../utils/roleTypes";
+import {User} from "../../../../modelos/user";
 
 @Component({
   selector: 'app-folders',
@@ -113,14 +114,34 @@ export class FoldersComponent {
     }).then(async (res) => {
       if(res.isConfirmed){
         let newFolder:Folder= {
-          id_user: this.userID,
           nombre: res.value,
           is_public: false
         }
-        this.serviceFolder.addFolder(newFolder)
+        this.serviceFolder.addFolder(newFolder, this.userID)
           .subscribe({
             next: res => {
-              this.folders.push(res.data as Folder)
+              let data: Folder = res.data as Folder
+              this.folders.push(data)
+
+              let role : Role = {
+                role_type: OWNER
+              }
+
+              this.collaboratorService.addCollaborator(role, this.userID, data.id)
+                .subscribe({
+                  next: res => {
+                    console.log(res)
+                  },
+                  error: (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                      console.log('Error de cliente o red', err.error.message);
+                      Swal.fire('Error de cliente o red', '', 'error');
+                    } else {
+                      console.log('Error en el servidor remoto', err.error.message);
+                      Swal.fire('Error en el servidor', '', 'error');
+                    }
+                  }
+              })
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -212,7 +233,7 @@ export class FoldersComponent {
           .subscribe({
             next: res => {
 
-              let id_user = res[0].id;
+              let id_user = (res.data as User).id;
               let id_folder = idFolder;
 
               let colaborador:Role = {

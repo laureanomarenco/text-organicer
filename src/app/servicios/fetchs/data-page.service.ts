@@ -29,14 +29,13 @@ export class DataPageService {
     return this.http.get<PageResponse>(url + 'page/' + id)
   }
 
-  //#TODO BACK -> PARA RUTA PERSONALIZADA
   getByFolderId(idFolder:number):Observable<PageResponse>{
-    return this.http.get<PageResponse>(url + 'page?id_folder=' + idFolder)
+    return this.http.get<PageResponse>(url + 'page/byFolder/' + idFolder)
   }
 
-  addPage(page:Page):Observable<PageResponse>{
+  addPage(page:Page, id_folder: number):Observable<PageResponse>{
     return this.http
-      .post<PageResponse>(url + 'page', page, this.getHttpOptions())
+      .post<PageResponse>(url + 'page/' + id_folder, page, this.getHttpOptions())
   }
 
   updatePage(id:number, page:Page):Observable<PageResponse>{

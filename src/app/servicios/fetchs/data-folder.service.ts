@@ -25,18 +25,17 @@ export class DataFolderService {
       .get<FolderResponse>(url + 'folder')
   }
 
-  //#TODO BACK -> PARA RUTA PERSONALIZADA
   getAllFoldersOfUser(idUser:number):Observable<FolderResponse>{
-    return this.http.get<FolderResponse>(url + 'folder?id_user=' + idUser)
+    return this.http.get<FolderResponse>(url + 'folder/byUser/' + idUser)
   }
 
   getById(id:number):Observable<FolderResponse>{
     return this.http.get<FolderResponse>(url + 'folder/' + id)
   }
 
-  addFolder(folder:Folder):Observable<FolderResponse>{
+  addFolder(folder:Folder, id_user: number):Observable<FolderResponse>{
     return this.http
-      .post<FolderResponse>(url + 'folder', folder, this.getHttpOptions())
+      .post<FolderResponse>(url + 'folder/' + id_user, folder, this.getHttpOptions())
   }
 
   updateFolder(id:number, folder:Folder):Observable<FolderResponse>{

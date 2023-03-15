@@ -32,22 +32,20 @@ export class DataCollaboratorsService {
     return this.http.post<RoleResponse>(url + 'role?id_user=' + id_user + '&id_folder=' + id_folder, collaborator,this.getHttpOptions())
   }
 
-  //#TODO Back -> Endpoint con query
   getAllByUserId(idUser: number):Observable<RoleResponse> {
-    return this.http.get<RoleResponse>(url + 'collaborator?id_user=' + idUser)
+    return this.http.get<RoleResponse>(url + 'role/byUser/' + idUser)
   }
 
-  //#TODO Back -> Endpoint con dos query
   getColabToDelete(id_folder:number, id_user:number):Observable<RoleResponse>{
-    return this.http.get<RoleResponse>(url + 'collaborator?id_folder=' + id_folder + '&id_user=' + id_user)
+    return this.http.get<RoleResponse>(url + 'role/byUserAndFolder?id_folder=' + id_folder + '&id_user=' + id_user)
   }
 
   deleteCollaborator(id:number): Observable<RoleResponse>{
-    return this.http.delete<RoleResponse>(url + 'collaborator/' + id)
+    return this.http.delete<RoleResponse>(url + 'role/' + id)
   }
 
   getAllByFolderId(id_folder:number): Observable<RoleResponse>{
-    return this.http.get<RoleResponse>(url + 'collaborator?id_folder=' + id_folder)
+    return this.http.get<RoleResponse>(url + 'role/byFolder/' + id_folder)
   }
 
   deleteColabsOfFolder(id_folder:number){
