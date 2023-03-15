@@ -14,7 +14,7 @@
 
 
   <input type="email"
-         placeholder="Ingresá tu email"
+         placeholder="Ingresá tu mail"
          class="landing-input"
          name="email"
          formControlName="email"
@@ -22,7 +22,7 @@
 
   <div *ngIf="formRegister.controls['email'].errors && formRegister.controls['email'].dirty" class="alert alert-warning">
     <p *ngIf="formRegister.controls['email'].errors['required']">Campo obligatorio</p>
-    <p *ngIf="formRegister.controls['email'].errors['email']">Debes ingresar un email válido</p>
+    <p *ngIf="formRegister.controls['email'].errors['email']">Debes ingresar un mail válido</p>
   </div>
 
   <input type="password"

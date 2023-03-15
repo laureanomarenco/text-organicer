@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EditService} from "./edit.service";
 import * as jsPDF from 'jspdf'
+import {Folder} from "../modelos/folder";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class FoldersService {
       this.servicePage
         .getByFolderId(id)
         .subscribe(res => {
-          this.pages = res
+          this.pages = res.data as Page[]
         })
       this.open = id
     }
@@ -66,9 +67,7 @@ export class FoldersService {
         Swal.fire('Página eliminada!', '', 'success')
         this.servicePage.deletePage(id)
           .subscribe({
-            next: res  => {
-              this.pages = this.pages.filter(p => p.id !== id)
-            },
+            next: res  => { this.pages = this.pages.filter(p => p.id !== id)},
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
                 console.log('Error de cliente o red', err.error.message);
@@ -97,7 +96,7 @@ export class FoldersService {
     this.servicePage.addPage(page)
       .subscribe({
         next: res => {
-          this.pages.push(res)
+          this.pages.push(res.data as Page)
           this.modalPage = null;
         },
         error: (err: HttpErrorResponse) => {
@@ -117,8 +116,8 @@ export class FoldersService {
       .getByFolderId(id)
       .subscribe(res => {
         const doc = new jsPDF();
-        let filename = nombre + '.pdf'
-        res.forEach(p => {
+        let filename = nombre + '.pdf';
+        (res.data as Page[]).forEach(p => {
           const pageWidth = 210;
           const pageHeight = 297;
           doc.setFontSize(36)

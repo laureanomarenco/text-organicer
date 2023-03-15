@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Folder} from "../../modelos/folder";
 import {url} from "../../config/constants";
+import {FolderResponse} from "../../modelos/responses/FolderResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -19,28 +20,28 @@ export class DataFolderService {
     }
   }
 
-  getAll():Observable<Array<Folder>>{
+  getAll():Observable<FolderResponse>{
     return this.http
-      .get<Array<Folder>>(url + 'folder')
+      .get<FolderResponse>(url + 'folder')
   }
 
   //#TODO BACK -> PARA RUTA PERSONALIZADA
-  getAllFoldersOfUser(idUser:number):Observable<Array<Folder>>{
-    return this.http.get<Array<Folder>>(url + 'folder?id_user=' + idUser)
+  getAllFoldersOfUser(idUser:number):Observable<FolderResponse>{
+    return this.http.get<FolderResponse>(url + 'folder?id_user=' + idUser)
   }
 
-  getById(id:number):Observable<Folder>{
-    return this.http.get<Folder>(url + 'folder/' + id)
+  getById(id:number):Observable<FolderResponse>{
+    return this.http.get<FolderResponse>(url + 'folder/' + id)
   }
 
-  addFolder(folder:Folder):Observable<Folder>{
+  addFolder(folder:Folder):Observable<FolderResponse>{
     return this.http
-      .post<Folder>(url + 'folder', folder, this.getHttpOptions())
+      .post<FolderResponse>(url + 'folder', folder, this.getHttpOptions())
   }
 
-  updateFolder(id:number, folder:Folder){
+  updateFolder(id:number, folder:Folder):Observable<FolderResponse>{
     return this.http
-      .put(url + 'folder/' + id, folder, this.getHttpOptions())
+      .put<FolderResponse>(url + 'folder/' + id, folder, this.getHttpOptions())
   }
 
   deleteFolder(id:number){

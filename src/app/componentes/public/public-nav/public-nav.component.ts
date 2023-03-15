@@ -39,12 +39,12 @@ export class PublicNavComponent {
     this.dataFolderService.getById(id)
       .subscribe({
         next: res => {
-          this.folder = res
+          this.folder = res.data as Folder
           if(this.folder.is_public){
             this.dataPageService.getByFolderId(id)
               .subscribe({
                 next: res => {
-                  this.pages = res;
+                  this.pages = res.data as Page[];
                 },
                 error: (err: HttpErrorResponse) => {
                   if (err.error instanceof Error) {

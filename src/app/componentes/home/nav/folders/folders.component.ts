@@ -6,12 +6,12 @@ import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
 import {EditService} from "../../../../servicios/edit.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Collaborator} from "../../../../modelos/collaborator";
+import {Role} from "../../../../modelos/role";
 import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
+import {COLLABORATOR, OWNER} from "../../../../utils/roleTypes";
 
-import {Page} from "../../../../modelos/page";
 @Component({
   selector: 'app-folders',
   templateUrl: './folders.component.html',
@@ -31,6 +31,7 @@ export class FoldersComponent {
     private collaboratorService: DataCollaboratorsService,
     private serviceUser:DataUserService,
     public foldersService: FoldersService,
+
   ) {}
 
   ngOnInit():void {
@@ -44,7 +45,7 @@ export class FoldersComponent {
       .getAllFoldersOfUser(this.userID)
         .subscribe({
           next: res => {
-          this.folders = res
+          this.folders = res.data as Folder[]
           console.log(this.folders)
           },
           error: (err: HttpErrorResponse) => {
@@ -75,7 +76,7 @@ export class FoldersComponent {
           .subscribe({
             next: res => {
               this.folders = this.folders.filter(f => f.id !== id)
-              this.collaboratorService.deleteColabsOfFolder(id)
+              this.collaboratorService.deleteColabsOfFolder(id) // tal vez innecesario
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -119,7 +120,7 @@ export class FoldersComponent {
         this.serviceFolder.addFolder(newFolder)
           .subscribe({
             next: res => {
-              this.folders.push(res)
+              this.folders.push(res.data as Folder)
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -165,9 +166,11 @@ export class FoldersComponent {
         this.serviceFolder.updateFolder(folder.id, upFolder)
           .subscribe({
             next: res => {
-              this.folders = this.folders.filter(f => f.id !== upFolder.id)
-              this.folders.push(upFolder)
-              this.foldersService.modalFolder = null
+              if(res.success) {
+                this.folders = this.folders.filter(f => f.id !== upFolder.id)
+                this.folders.push(upFolder)
+                this.foldersService.modalFolder = null
+              }
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -208,21 +211,24 @@ export class FoldersComponent {
         this.serviceUser.getByUsername(res.value)
           .subscribe({
             next: res => {
-              let colaborador:Collaborator = {
-                idUser: res[0].id,
-                idFolder: idFolder,
-                username: res[0].username,
+
+              let id_user = res[0].id;
+              let id_folder = idFolder;
+
+              let colaborador:Role = {
+                role_type: COLLABORATOR
               }
-              this.collaboratorService.getAllByFolderId(colaborador.idFolder)
+
+              this.collaboratorService.getAllByFolderId(id_folder)
                 .subscribe({
                   next: res => {
-                    res.forEach(c => {
-                      if(colaborador.idUser === c.idUser){
+                    (res.data as Role[]).forEach(c => {
+                      if(id_user === c.id_user){
                         this.exists = true;
                       }
                     })
                     if(!this.exists){
-                      this.collaboratorService.addCollaborator(colaborador)
+                      this.collaboratorService.addCollaborator(colaborador, id_user, id_folder)
                         .subscribe({
                           next: res => {
                             this.foldersService.modalFolder = null;
@@ -275,16 +281,19 @@ export class FoldersComponent {
     this.serviceFolder.getById(id)
       .subscribe({
         next: res => {
+
+          let data: Folder = res.data as Folder
+
           let up = {
-            id: res.id,
-            id_user: res.id_user,
-            nombre: res.nombre,
+            id: data.id,
+            id_user: data.id_user,
+            nombre: data.nombre,
             is_public: true
           }
           this.serviceFolder.updateFolder(id, up)
             .subscribe({
               next: res => {
-                this.router.navigate(['/publicfolder', id]);
+                if(res.success) this.router.navigate(['/publicfolder', id]);
               },
               error: (err: HttpErrorResponse) => {
                 if (err.error instanceof Error) {

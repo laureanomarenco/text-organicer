@@ -3,6 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataUserPrivateService} from "../../../servicios/fetchs/data-user-private.service";
 import {UserPrivate} from "../../../modelos/userPrivate";
+import {HttpErrorResponse} from "@angular/common/http";
+import Swal from "sweetalert2";
+import * as CryptoJS from 'crypto-js';
+import {User} from "../../../modelos/user";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +21,6 @@ export class LoginComponent {
   constructor(
     private formBuilder:FormBuilder,
     private router:Router,
-
     private dataUserPrivateService: DataUserPrivateService
   ) {
     this.formLogin = formBuilder.group({
@@ -44,21 +47,23 @@ export class LoginComponent {
       mail: email,
       password: password
     }
-    // this.dataUserPrivateService.validateUser(userToValidate)
-    //   .subscribe({
-    //     next: res => {
-    //       if(res === null){
-    //         console.log("Datos incorrectos")
-    //       } else {
-    //         localStorage.setItem('user', res.username)
-    //       }
-    //     }
-    //   })
-
-
-
-    // #TODO enviar al back a validar
-    this.router.navigate(['/home'])
-
+    this.dataUserPrivateService.validateUser(userToValidate)
+      .subscribe({
+        next: res => {
+          console.log(res)
+          if(res.success) {
+            localStorage.setItem('username', (res.data as User).username)
+            this.router.navigate(['/home'])
+          } else Swal.fire("Credenciales incorrectas", "", "error")
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Error de cliente o red', );
+            Swal.fire('Error de cliente o red', '', 'error');
+          } else {
+            Swal.fire( err.error.message, '', 'error');
+          }
+        }
+      })
   }
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Page} from "../../modelos/page";
 import {url} from "../../config/constants";
+import {PageResponse} from "../../modelos/responses/PageResponse";
 
 // #TODO Excepciones servidor caído
 @Injectable({
@@ -20,27 +21,27 @@ export class DataPageService {
     }
   }
 
-  getAll():Observable<Array<Page>>{
-    return this.http.get<Array<Page>>(url + 'page')
+  getAll():Observable<PageResponse>{
+    return this.http.get<PageResponse>(url + 'page')
   }
 
-  getById(id:number):Observable<Page>{
-    return this.http.get<Page>(url + 'page/' + id)
+  getById(id:number):Observable<PageResponse>{
+    return this.http.get<PageResponse>(url + 'page/' + id)
   }
 
   //#TODO BACK -> PARA RUTA PERSONALIZADA
-  getByFolderId(idFolder:number):Observable<Array<Page>>{
-    return this.http.get<Array<Page>>(url + 'page?id_folder=' + idFolder)
+  getByFolderId(idFolder:number):Observable<PageResponse>{
+    return this.http.get<PageResponse>(url + 'page?id_folder=' + idFolder)
   }
 
-  addPage(page:Page):Observable<Page>{
+  addPage(page:Page):Observable<PageResponse>{
     return this.http
-      .post<Page>(url + 'page', page, this.getHttpOptions())
+      .post<PageResponse>(url + 'page', page, this.getHttpOptions())
   }
 
-  updatePage(id:number, page:Page){
+  updatePage(id:number, page:Page):Observable<PageResponse>{
     return this.http
-      .put(url + 'page/' + id, page, this.getHttpOptions())
+      .put<PageResponse>(url + 'page/' + id, page, this.getHttpOptions())
   }
 
   deletePage(id:number){

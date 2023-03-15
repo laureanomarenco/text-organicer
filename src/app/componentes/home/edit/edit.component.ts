@@ -47,9 +47,7 @@ export class EditComponent {
     if((event.type === 'blur' || event.key === 'Enter') && this.page.id !== 0){
       this.pageService.updatePage(this.page.id, this.page)
         .subscribe({
-          next: res => {
-          console.log(this.page)
-          },
+          next: res => { console.log(res) },
           error: (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
               console.log('Error de cliente o red', err.error.message);

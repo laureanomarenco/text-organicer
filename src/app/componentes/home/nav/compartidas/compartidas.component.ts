@@ -6,6 +6,7 @@ import {Folder} from "../../../../modelos/folder";
 import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-solid-svg-icons";
+import {Role} from "../../../../modelos/role";
 
 @Component({
   selector: 'app-compartidas',
@@ -29,15 +30,13 @@ export class CompartidasComponent {
     this.compartidasService.getAllByUserId(this.userID)
       .subscribe({
         next: res => {
-          res.forEach(c => {
-            console.log(c)
-
-            this.dataFolderService.getById(c.idFolder)
+          (res.data as Role[]).forEach(c => {
+            this.dataFolderService.getById(c.id_folder)
               .subscribe({
                 next: res => {
                   console.log(res)
 
-                  this.folders.push(res)
+                  this.folders.push(res.data as Folder)
                 },
                 error: (err: HttpErrorResponse) => {
                   if (err.error instanceof Error) {
@@ -68,7 +67,7 @@ export class CompartidasComponent {
       })
   }
 
-  borrarCollaborator(idFolder: number) {
+  borrarCollaborator(id_folder: number) {
     Swal.fire({
       title: 'Estás seguro que querés dejar de colaborar con esta carpeta?',
       showDenyButton: true,
@@ -76,16 +75,13 @@ export class CompartidasComponent {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.compartidasService.getColabToDelete(idFolder, this.userID)
+        this.compartidasService.getColabToDelete(id_folder, this.userID)
           .subscribe({
             next: res => {
-              console.log(res)
-              this.folders = this.folders.filter(f => f.id !== res[0].id_folder)
-              this.compartidasService.deleteCollaborator(res[0].id)
+              this.folders = this.folders.filter(f => f.id !== (res.data as Role).id_folder)
+              this.compartidasService.deleteCollaborator((res.data as Role).id)
                 .subscribe({
-                  next: res => {
-                    Swal.fire('Colaboración cerrada', '', 'success')
-                  },
+                  next: res => { Swal.fire('Colaboración cerrada', '', 'success')},
                   error: (err: HttpErrorResponse) => {
                     if (err.error instanceof Error) {
                       console.log('Error de cliente o red', err.error.message);

@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 })
 export class UserComponent {
   faBars = faBars;
-  users:Array<User> = []
+  users: User[];
 
   constructor(private service:DataUserService) {}
 
@@ -21,8 +21,7 @@ export class UserComponent {
       .getAll()
       .subscribe({
           next: res => {
-            this.users = res
-            console.log(this.users)
+            if(res.success) this.users = res.data as User[]
           },
         error: (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {

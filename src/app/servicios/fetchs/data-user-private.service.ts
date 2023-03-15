@@ -3,14 +3,19 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {url} from "../../config/constants";
 import {UserPrivate} from "../../modelos/userPrivate";
-import {User} from "../../modelos/user";
+import {DataUserService} from "./data-user.service";
+import {UserResponse} from "../../modelos/responses/userResponse";
+import {UserPrivateResponse} from "../../modelos/responses/userPrivateResponse";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataUserPrivateService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private userService: DataUserService
+  ) { }
 
   getHttpOptions(){
     return {
@@ -20,22 +25,22 @@ export class DataUserPrivateService {
     }
   }
 
-  getAll():Observable<Array<UserPrivate>>{
-    return this.http.get<Array<UserPrivate>>(url + 'user_private')
+  getAll():Observable<UserPrivateResponse>{
+    return this.http.get<UserPrivateResponse>(url + 'user_private')
   }
 
-  getById(id:number):Observable<UserPrivate>{
-    return this.http.get<UserPrivate>(url + 'user_private/' + id)
+  getById(id:number):Observable<UserPrivateResponse>{
+    return this.http.get<UserPrivateResponse>(url + 'user_private/' + id)
   }
 
-  addUserPrivate(userPrivate:UserPrivate):Observable<UserPrivate>{
+  addUserPrivate(userPrivate:UserPrivate, id:number):Observable<UserPrivateResponse>{
     return this.http
-      .post<UserPrivate>(url + 'user_private', userPrivate, this.getHttpOptions())
+      .post<UserPrivateResponse>(url + 'user_private/' + id, userPrivate, this.getHttpOptions())
   }
 
-  updateUserPrivate(id:number, userPrivate:UserPrivate){
+  updateUserPrivate(id:number, userPrivate:UserPrivate):Observable<UserPrivateResponse>{
     return this.http
-      .put(url + 'user_private/' + id, userPrivate, this.getHttpOptions())
+      .put<UserPrivateResponse>(url + 'user_private/' + id, userPrivate, this.getHttpOptions())
   }
 
   deleteUserPrivate(id:number){
@@ -43,7 +48,8 @@ export class DataUserPrivateService {
       .delete(url + 'user_private/' + id)
   }
 
-  validateUser(user:UserPrivate):Observable<User> | null{
-    return this.http.post<User>(url + 'user_private/login', user, this.getHttpOptions())
+  validateUser(user:UserPrivate):Observable<any> {
+    return this.http.post<any>(url + 'user_private/login', user, this.getHttpOptions())
   }
+
 }
