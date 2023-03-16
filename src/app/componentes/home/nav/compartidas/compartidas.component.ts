@@ -7,6 +7,7 @@ import {DataFolderService} from "../../../../servicios/fetchs/data-folder.servic
 import {FoldersService} from "../../../../servicios/folders.service";
 import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-solid-svg-icons";
 import {Role} from "../../../../modelos/role";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-compartidas',
@@ -16,55 +17,54 @@ import {Role} from "../../../../modelos/role";
 export class CompartidasComponent {
   faElilipsisVertical = faEllipsisVertical; faTrash = faTrashCan; faClose = faClose;
 
-  //#todo user
-  userID:number = 1;
-  folders:Array<Folder> = [];
+  userID: number = parseInt(localStorage.getItem('id'));
+  folders: Array<Folder> = [];
 
 
   //#TODO BLOQUEAR EDICIÓN DOBLE
   constructor(
+    private router: Router,
     private compartidasService: DataCollaboratorsService,
     private dataFolderService: DataFolderService,
     public folderService: FoldersService
   ) {
-    this.compartidasService.getAllByUserId(this.userID)
-      .subscribe({
-        next: res => {
-          (res.data as Role[]).forEach(c => {
-            this.dataFolderService.getById(c.id_folder)
-              .subscribe({
-                next: res => {
-                  console.log(res)
+    if(this.userID) {
+      this.compartidasService.getAllByUserId(this.userID)
+        .subscribe({
+          next: res => {
+            (res.data as Role[]).forEach(c => {
+              this.dataFolderService.getById(c.id_folder)
+                .subscribe({
+                  next: res => {
+                    console.log(res)
 
-                  this.folders.push(res.data as Folder)
-                },
-                error: (err: HttpErrorResponse) => {
-                  if (err.error instanceof Error) {
-                    console.log('Error de cliente o red', err.error.message);
-                    Swal.fire('Error de cliente o red', '', 'error');
-
-                  } else {
-                    console.log('Error en el servidor remoto', err.error.message);
-                    Swal.fire('Error en el servidor', '', 'error');
-
+                    this.folders.push(res.data as Folder)
+                  },
+                  error: (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                      console.log('Error de cliente o red', err.error.message);
+                      Swal.fire('Error de cliente o red', '', 'error');
+                    } else {
+                      console.log('Error en el servidor remoto', err.error.message);
+                      Swal.fire('Error en el servidor', '', 'error');
+                    }
                   }
-                }
-              })
-          })
+                })
+            })
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Error de cliente o red', err.error.message);
+              Swal.fire('Error de cliente o red', '', 'error');
 
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log('Error de cliente o red', err.error.message);
-            Swal.fire('Error de cliente o red', '', 'error');
+            } else {
+              console.log('Error en el servidor remoto', err.error.message);
+              Swal.fire('Error en el servidor', '', 'error');
 
-          } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
-
+            }
           }
-        }
-      })
+        })
+    } else this.router.navigate(['/landing'])
   }
 
   borrarCollaborator(id_folder: number) {

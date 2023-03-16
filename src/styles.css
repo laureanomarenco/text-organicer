@@ -17,13 +17,13 @@
 
 }
 
-/*//////////////*/
-/*    MOBILE    */
-/*//////////////*/
+/*////////////////*/
+/* ### MOBILE ### */
+/*////////////////*/
 @media (max-width: 600px) {
   aside {
     width: 100%;
-    height: 10vh;
+    height: 2em;
     background-color: var(--navBackground);
     padding: 2em;
     position: fixed;
@@ -114,7 +114,7 @@
 }
 
 /*///////////*/
-/*    WEB    */
+/* ## WEB ## */
 /*///////////*/
 @media (min-width: 600px) {
   aside {
@@ -212,7 +212,9 @@
 }
 
 
+/*////////////////////////*/
 /* ###### LANDING ####### */
+/*////////////////////////*/
 
 .landing-title {
   margin-bottom: 2vh;
@@ -245,7 +247,9 @@
   background-color: #efefef;
 }
 
+/*///////////////////*/
 /* ###### NAV ###### */
+/*///////////////////*/
 
 .user {
   margin-top: -.7em;
@@ -297,16 +301,29 @@
   -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
 }
 
+.user-modal-background {
+  position: absolute;
+  margin-top: 1em;
+  margin-left: 1em;
+  padding: 1em;
+  background-color: var(--blanco);
+  box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -webkit-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+  -moz-box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
+}
+
 /*///////////////////////*/
 /* ##### PAGE EDIT ##### */
 /*///////////////////////*/
-
 
 .input-folder {
   width: 80%;
 }
 
+/*/////////////////////*/
 /* #### GENERALES #### */
+/*/////////////////////*/
+
 .pointer {
   cursor: pointer;
 }

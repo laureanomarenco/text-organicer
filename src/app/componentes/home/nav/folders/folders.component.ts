@@ -12,6 +12,7 @@ import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
 import {COLLABORATOR, OWNER} from "../../../../utils/roleTypes";
 import {User} from "../../../../modelos/user";
+import {LocalizedString} from "@angular/compiler";
 
 @Component({
   selector: 'app-folders',
@@ -19,11 +20,12 @@ import {User} from "../../../../modelos/user";
   styleUrls: ['./folders.component.css']
 })
 export class FoldersComponent {
-  faElilipsisVertical = faEllipsisVertical; faPlus = faPlus; faTrash = faTrashCan; faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes; faDownload = faDownload;
+  faElilipsisVertical = faEllipsisVertical; faPlus = faPlus; faTrash = faTrashCan;
+  faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes;
+  faDownload = faDownload;
 
-  //#TODO Manejo de sesión user
-  // Tal vez compruebo con token, se verá en back
-  userID:number = 1;
+  // #TODO Token usuario
+  userID:number = parseInt(localStorage.getItem('id'));
   folders:Array<Folder>;
 
   constructor(
@@ -36,61 +38,27 @@ export class FoldersComponent {
   ) {}
 
   ngOnInit():void {
-    // this.serviceUser
-    //   .getById(this.userID)
-    //   .subscribe(res => {
-    //
-    //   })
-
-    this.serviceFolder
-      .getAllFoldersOfUser(this.userID)
-        .subscribe({
-          next: res => {
-          this.folders = res.data as Folder[]
-          console.log(this.folders)
-          },
-          error: (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log('Error de cliente o red', err.error.message);
-              Swal.fire('Error de cliente o red', '', 'error');
-
-            } else {
-              console.log('Error en el servidor remoto', err.error.message);
-              Swal.fire('Error en el servidor', '', 'error');
-
-            }
-          }
-        })
-  }
-
-  deleteFolder(id:number) {
-    Swal.fire({
-      title: 'Estás seguro que querés eliminar esta carpeta?',
-      text: 'Ni tu ni los colaboradores que pueda tener está carpeta podrán volver a acceder a ella',
-      showDenyButton: true,
-      confirmButtonText: 'Eliminar',
-      denyButtonText: `Cancelar`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Carpeta eliminada!', '', 'success')
-        this.serviceFolder.deleteFolder(id)
+    if(this.userID) {
+      this.serviceFolder
+        .getAllFoldersOfUser(this.userID)
           .subscribe({
             next: res => {
-              this.folders = this.folders.filter(f => f.id !== id)
-              this.collaboratorService.deleteColabsOfFolder(id) // tal vez innecesario
+            this.folders = res.data as Folder[]
+            console.log(this.folders)
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
                 console.log('Error de cliente o red', err.error.message);
                 Swal.fire('Error de cliente o red', '', 'error');
+
               } else {
                 console.log('Error en el servidor remoto', err.error.message);
                 Swal.fire('Error en el servidor', '', 'error');
+
               }
             }
-        })
-      }
-    })
+          })
+      } else this.router.navigate(['/landing'])
   }
 
   newFolder() {
@@ -141,7 +109,7 @@ export class FoldersComponent {
                       Swal.fire('Error en el servidor', '', 'error');
                     }
                   }
-              })
+                })
             },
             error: (err: HttpErrorResponse) => {
               if (err.error instanceof Error) {
@@ -155,9 +123,36 @@ export class FoldersComponent {
           })
       }
     })
-
   }
-
+  deleteFolder(id:number) {
+    Swal.fire({
+      title: 'Estás seguro que querés eliminar esta carpeta?',
+      text: 'Ni tu ni los colaboradores que pueda tener está carpeta podrán volver a acceder a ella',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Carpeta eliminada!', '', 'success')
+        this.serviceFolder.deleteFolder(id)
+          .subscribe({
+            next: res => {
+              this.folders = this.folders.filter(f => f.id !== id)
+              this.collaboratorService.deleteColabsOfFolder(id) // tal vez innecesario
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log('Error de cliente o red', err.error.message);
+                Swal.fire('Error de cliente o red', '', 'error');
+              } else {
+                console.log('Error en el servidor remoto', err.error.message);
+                Swal.fire('Error en el servidor', '', 'error');
+              }
+            }
+        })
+      }
+    })
+  }
   cambiarNombreCarpeta(folder: Folder) {
     Swal.fire({
       title: "Nuevo titulo",
@@ -206,7 +201,6 @@ export class FoldersComponent {
       }
     })
   }
-
   exists : boolean = false;
   agregarColaborador(idFolder:number) {
     Swal.fire({
@@ -297,7 +291,6 @@ export class FoldersComponent {
       }
     })
   }
-
   cambiarVisibilidad(id: number) {
     this.serviceFolder.getById(id)
       .subscribe({

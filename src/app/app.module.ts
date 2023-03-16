@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -20,6 +20,7 @@ import { PublicComponent } from './componentes/public/public.component';
 import { PublicNavComponent } from './componentes/public/public-nav/public-nav.component';
 import { PublicTextComponent } from './componentes/public/public-text/public-text.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import {AppRoutingModule} from "./app-routing.module";
 
 
 

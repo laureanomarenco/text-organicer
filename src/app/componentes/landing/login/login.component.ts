@@ -22,6 +22,7 @@ export class LoginComponent {
     private formBuilder:FormBuilder,
     private router:Router,
     private dataUserPrivateService: DataUserPrivateService
+
   ) {
     this.formLogin = formBuilder.group({
       email: ['', Validators.compose([
@@ -45,14 +46,15 @@ export class LoginComponent {
 
     let userToValidate:UserPrivate = {
       mail: email,
-      password: password
+      password: CryptoJS.SHA256(password).toString()
     }
+
     this.dataUserPrivateService.validateUser(userToValidate)
       .subscribe({
         next: res => {
           console.log(res)
           if(res.success) {
-            localStorage.setItem('username', (res.data as User).username)
+            localStorage.setItem('id', (res.data as User).id.toString())
             this.router.navigate(['/home'])
           } else Swal.fire("Credenciales incorrectas", "", "error")
         },

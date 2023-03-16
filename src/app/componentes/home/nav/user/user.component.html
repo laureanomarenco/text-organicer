@@ -1,4 +1,72 @@
 <div class="user d-flex justify-content-between">
-  <p>Usuario</p>
+  <p (click)="userModal()">{{ user.username }}</p>
+  <div *ngIf="modal" class="user-modal-background">
+
+    <div class="d-flex justify-content-between">
+      <fa-icon (click)="
+      modal = false;
+      modalEdit = true;
+      modalPass = false;
+      modalData = false;" [icon]="faClose"
+               class="pointer"></fa-icon>
+    </div>
+
+    <div *ngIf="modalEdit" class="m-4">
+      <p (click)="logOut()" class="mt-2 pointer">Log out</p>
+      <p (click)="modalEdit = false; modalPass = false; modalData = true" class="pointer">Editar usuario</p>
+      <p (click)="modalEdit = false; modalEdit = false; modalPass = true">Cambiar contraseña</p>
+    </div>
+
+    <!-- EDIT USER -->
+    <form *ngIf="modalData" #formularioUpdateUser="ngForm" autocomplete="off" (ngSubmit)="updateUser(formularioUpdateUser)">
+      <input #usernameControl="ngModel"
+             class="mt-2"
+             type="text"
+             [(ngModel)]="user.username"
+             name="username"
+             value="{{user.username}}"
+             minlength="4"
+             maxlength="20"
+             required
+      />
+      <input #mailControl="ngModel"
+             class="mt-2"
+             type="email"
+             name="mail"
+             [(ngModel)]="userPrivate.mail"
+             value="{{userPrivate.mail}}"
+             required
+      />
+
+      <button type="submit" class="mt-2">Actualizar</button>
+    </form>
+
+    <!-- CHANGE PASS -->
+    <form *ngIf="modalPass" #formulacioChangePass="ngForm" autocomplete="off" (ngSubmit)="changePass(formulacioChangePass)">
+      <input #passControl="ngModel"
+             class="mt-2"
+             type="password"
+             name="password"
+             [(ngModel)]="password"
+             minlength="8"
+             maxlength="20"
+             required
+      />
+
+      <input #passControl="ngModel"
+             class="mt-2"
+             type="password"
+             name="passAgain"
+             [(ngModel)]="passAgain"
+             minlength="8"
+             maxlength="20"
+             required
+      />
+    <button type="submit" class="mt-2">Cambiar</button>
+    </form>
+
+
+
+  </div>
   <fa-icon [icon]="faBars" class="pointer" id="bars" (click)="toggleNav()"></fa-icon>
 </div>
