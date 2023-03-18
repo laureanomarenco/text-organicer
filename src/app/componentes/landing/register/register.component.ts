@@ -68,14 +68,14 @@ export class RegisterComponent {
 
     let userPrivate: UserPrivate = {
       mail: this.formRegister.value.email,
-      password: CryptoJS.SHA256(this.formRegister.value.password).toString()
+      password: this.formRegister.value.password
     }
 
     let id: number;
     this.userService.addUser(user).subscribe({
       next: res => {
         if(res.success) {
-          localStorage.setItem("username", user.username)
+          localStorage.setItem("token", (res.data as User).token)
           id = (res.data as User).id
         }
 

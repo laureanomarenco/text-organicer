@@ -16,6 +16,7 @@ export class EditComponent {
 
   page: Page = {
     id: 0,
+    page_order: 0,
     id_folder: 0,
     titulo: "¡Bienvenido!",
     subtitulo: "Crea tus carpetas. \nEditá y organizá tus textos.",
