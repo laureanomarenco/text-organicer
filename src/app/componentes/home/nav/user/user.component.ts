@@ -17,7 +17,7 @@ import * as CryptoJS from 'crypto-js';
 export class UserComponent {
   faBars = faBars; faClose = faClose;
 
-  userID: number = parseInt(localStorage.getItem('id'));
+  token: string = localStorage.getItem('token');
   user: User;
   userPrivate: UserPrivate;
 
@@ -29,23 +29,42 @@ export class UserComponent {
   ) {}
 
   ngOnInit():void {
-    this.service
-      .getById(this.userID)
+    this.service.getByToken(this.token)
       .subscribe({
-          next: res => {
-            this.user = res.data as User
-          },
+        next: res => {
+          this.user = res.data as User
+        },
         error: (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
             console.log('Error de cliente o red', err.error.message);
             Swal.fire('Error de cliente o red', '', 'error');
+
           } else {
             console.log('Error en el servidor remoto', err.error.message);
             Swal.fire('Error en el servidor', '', 'error');
+            this.router.navigate(['/landing'])
+
           }
         }
-        }
-      )
+      })
+
+    // this.service
+    //   .getById(this.userID)
+    //   .subscribe({
+    //       next: res => {
+    //         this.user = res.data as User
+    //       },
+    //     error: (err: HttpErrorResponse) => {
+    //       if (err.error instanceof Error) {
+    //         console.log('Error de cliente o red', err.error.message);
+    //         Swal.fire('Error de cliente o red', '', 'error');
+    //       } else {
+    //         console.log('Error en el servidor remoto', err.error.message);
+    //         Swal.fire('Error en el servidor', '', 'error');
+    //       }
+    //     }
+    //     }
+    //   )
 
     if(window.innerWidth > 600){
       const bars = document.querySelector('#bars')
@@ -65,7 +84,7 @@ export class UserComponent {
   userModal() {
     if(this.modal) this.modal = false
     else {
-      this.serviceUserPrivate.getById(this.userID)
+      this.serviceUserPrivate.getById(this.user.id)
         .subscribe({
           next: res => {
             this.userPrivate = res.data as UserPrivate
@@ -91,7 +110,7 @@ export class UserComponent {
   modalData: boolean = false;
 
   logOut() {
-    localStorage.removeItem('id')
+    localStorage.removeItem('token')
     this.router.navigate(['/landing'])
   }
 
@@ -99,7 +118,8 @@ export class UserComponent {
     let usUp: User = {
       id: this.user.id,
       username: formularioUpdateUser.value.username,
-      imagen: "http://"
+      imagen: "http://",
+      token: this.token,
     }
 
     this.service.updateUser(this.user.id, usUp)
@@ -122,7 +142,7 @@ export class UserComponent {
       id: this.userPrivate.id,
       mail: formularioUpdateUser.value.mail,
       password: this.userPrivate.password,
-      user_id: this.userID
+      user_id: this.user.id
     }
     this.serviceUserPrivate.updateUserPrivate(this.userPrivate.id, this.userPrivate)
       .subscribe({
@@ -150,8 +170,8 @@ export class UserComponent {
       let upUpdate: UserPrivate = {
         id: this.userPrivate.id,
         mail: this.userPrivate.mail,
-        password: CryptoJS.SHA256(formulacioChangePass.value.password).toString(),
-        user_id: this.userID
+        password: formulacioChangePass.value.password,
+        user_id: this.user.id
       }
 
       this.serviceUserPrivate.updateUserPrivate(upUpdate.id, upUpdate)

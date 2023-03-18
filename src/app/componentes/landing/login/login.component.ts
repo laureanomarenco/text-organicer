@@ -46,7 +46,7 @@ export class LoginComponent {
 
     let userToValidate:UserPrivate = {
       mail: email,
-      password: CryptoJS.SHA256(password).toString()
+      password: password
     }
 
     this.dataUserPrivateService.validateUser(userToValidate)
@@ -54,7 +54,7 @@ export class LoginComponent {
         next: res => {
           console.log(res)
           if(res.success) {
-            localStorage.setItem('id', (res.data as User).id.toString())
+            localStorage.setItem('token', (res.data as User).token)
             this.router.navigate(['/home'])
           } else Swal.fire("Credenciales incorrectas", "", "error")
         },
@@ -63,7 +63,7 @@ export class LoginComponent {
             console.log('Error de cliente o red', );
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            Swal.fire( err.error.message, '', 'error');
+            Swal.fire(err.error.message, '', 'error');
           }
         }
       })

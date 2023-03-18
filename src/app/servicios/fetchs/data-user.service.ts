@@ -49,5 +49,8 @@ export class DataUserService {
   }
 
 
+  getByToken(token: string): Observable<UserResponse>{
+    return this.http.post<UserResponse>(url + "user/validateToken/" + token, this.getHttpOptions())
+  }
 }
 

@@ -8,6 +8,8 @@ import {FoldersService} from "../../../../servicios/folders.service";
 import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-solid-svg-icons";
 import {Role} from "../../../../modelos/role";
 import {Router} from "@angular/router";
+import {User} from "../../../../modelos/user";
+import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 
 @Component({
   selector: 'app-compartidas',
@@ -17,40 +19,61 @@ import {Router} from "@angular/router";
 export class CompartidasComponent {
   faElilipsisVertical = faEllipsisVertical; faTrash = faTrashCan; faClose = faClose;
 
-  userID: number = parseInt(localStorage.getItem('id'));
+  token: string = localStorage.getItem('token');
   folders: Array<Folder> = [];
-
+  user: User;
 
   //#TODO BLOQUEAR EDICIÓN DOBLE
   constructor(
     private router: Router,
+    private userService: DataUserService,
     private compartidasService: DataCollaboratorsService,
     private dataFolderService: DataFolderService,
     public folderService: FoldersService
   ) {
-    if(this.userID) {
-      this.compartidasService.getAllByUserId(this.userID)
+    if(this.token) {
+      this.userService.getByToken(this.token)
         .subscribe({
           next: res => {
-            (res.data as Role[]).forEach(c => {
-              this.dataFolderService.getById(c.id_folder)
-                .subscribe({
-                  next: res => {
-                    console.log(res)
+            this.user = res.data as User
+            this.compartidasService.getAllByUserId(this.user.id)
+              .subscribe({
+                next: res => {
+                  (res.data as Role[]).forEach(c => {
+                    this.dataFolderService.getById(c.id_folder)
+                      .subscribe({
+                        next: res => {
+                          console.log(res)
 
-                    this.folders.push(res.data as Folder)
-                  },
-                  error: (err: HttpErrorResponse) => {
-                    if (err.error instanceof Error) {
-                      console.log('Error de cliente o red', err.error.message);
-                      Swal.fire('Error de cliente o red', '', 'error');
-                    } else {
-                      console.log('Error en el servidor remoto', err.error.message);
-                      Swal.fire('Error en el servidor', '', 'error');
-                    }
+                          this.folders.push(res.data as Folder)
+                        },
+                        error: (err: HttpErrorResponse) => {
+                          if (err.error instanceof Error) {
+                            console.log('Error de cliente o red', err.error.message);
+                            Swal.fire('Error de cliente o red', '', 'error');
+                          } else {
+                            console.log('Error en el servidor remoto', err.error.message);
+                            Swal.fire('Error en el servidor', '', 'error');
+                            this.router.navigate(['/landing'])
+
+                          }
+                        }
+                      })
+                  })
+                },
+                error: (err: HttpErrorResponse) => {
+                  if (err.error instanceof Error) {
+                    console.log('Error de cliente o red', err.error.message);
+                    Swal.fire('Error de cliente o red', '', 'error');
+
+                  } else {
+                    console.log('Error en el servidor remoto', err.error.message);
+                    Swal.fire('Error en el servidor', '', 'error');
+
                   }
-                })
-            })
+                }
+              })
+
           },
           error: (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
@@ -64,6 +87,7 @@ export class CompartidasComponent {
             }
           }
         })
+
     } else this.router.navigate(['/landing'])
   }
 
@@ -75,7 +99,7 @@ export class CompartidasComponent {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.compartidasService.getColabToDelete(id_folder, this.userID)
+        this.compartidasService.getColabToDelete(id_folder, this.user.id)
           .subscribe({
             next: res => {
               this.folders = this.folders.filter(f => f.id !== (res.data as Role).id_folder)

@@ -25,7 +25,8 @@ export class FoldersComponent {
   faDownload = faDownload;
 
   // #TODO Token usuario
-  userID:number = parseInt(localStorage.getItem('id'));
+  token: string = localStorage.getItem('token');
+  user: User;
   folders:Array<Folder>;
 
   constructor(
@@ -38,26 +39,45 @@ export class FoldersComponent {
   ) {}
 
   ngOnInit():void {
-    if(this.userID) {
-      this.serviceFolder
-        .getAllFoldersOfUser(this.userID)
-          .subscribe({
-            next: res => {
-            this.folders = res.data as Folder[]
-            console.log(this.folders)
-            },
-            error: (err: HttpErrorResponse) => {
-              if (err.error instanceof Error) {
-                console.log('Error de cliente o red', err.error.message);
-                Swal.fire('Error de cliente o red', '', 'error');
+    if(this.token) {
+      this.serviceUser.getByToken(this.token)
+        .subscribe({
+          next: res => {
+            this.user = res.data as User
+            this.folders = (res.data as User).folders;
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Error de cliente o red', err.error.message);
+              Swal.fire('Error de cliente o red', '', 'error');
 
-              } else {
-                console.log('Error en el servidor remoto', err.error.message);
-                Swal.fire('Error en el servidor', '', 'error');
+            } else {
+              console.log('Error en el servidor remoto', err.error.message);
+              this.router.navigate(['/landing'])
+              Swal.fire('Error en el servidor', '', 'error');
 
-              }
             }
-          })
+          }
+        })
+      // this.serviceFolder
+      //   .getAllFoldersOfUser(this.userID)
+      //     .subscribe({
+      //       next: res => {
+      //       this.folders = res.data as Folder[]
+      //       console.log(this.folders)
+      //       },
+      //       error: (err: HttpErrorResponse) => {
+      //         if (err.error instanceof Error) {
+      //           console.log('Error de cliente o red', err.error.message);
+      //           Swal.fire('Error de cliente o red', '', 'error');
+      //
+      //         } else {
+      //           console.log('Error en el servidor remoto', err.error.message);
+      //           Swal.fire('Error en el servidor', '', 'error');
+      //
+      //         }
+      //       }
+      //     })
       } else this.router.navigate(['/landing'])
   }
 
@@ -85,7 +105,7 @@ export class FoldersComponent {
           nombre: res.value,
           is_public: false
         }
-        this.serviceFolder.addFolder(newFolder, this.userID)
+        this.serviceFolder.addFolder(newFolder, this.user.id)
           .subscribe({
             next: res => {
               let data: Folder = res.data as Folder
@@ -95,7 +115,7 @@ export class FoldersComponent {
                 role_type: OWNER
               }
 
-              this.collaboratorService.addCollaborator(role, this.userID, data.id)
+              this.collaboratorService.addCollaborator(role, this.user.id, data.id)
                 .subscribe({
                   next: res => {
                     console.log(res)

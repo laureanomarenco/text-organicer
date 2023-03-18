@@ -12,6 +12,7 @@ export class PublicTextComponent {
 
   page: Page  = {
     id: 0,
+    page_order: 0,
     id_folder: 0,
     titulo: "¡Bienvenido!",
     subtitulo: "Navega entre los textos de esta carpeta",
