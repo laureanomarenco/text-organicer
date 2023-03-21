@@ -38,11 +38,6 @@ export class EditComponent {
   }
 
 
-  resizeTextarea(element) {
-    element.style.height = "5px";
-    element.style.height = (element.scrollHeight)+"px";
-  }
-
 
   onChange(event: any) {
     if((event.type === 'blur' || event.key === 'Enter') && this.page.id !== 0){

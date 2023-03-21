@@ -14,7 +14,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--fuenteTitulos);
-
 }
 
 /*////////////////*/
@@ -120,7 +119,7 @@
   aside {
     float: left;
     width: 20%;
-    height: 100vh;
+    height: 100%;
     background-color: var(--navBackground);
     padding: 2em 1.2em;
     position: fixed;
@@ -156,7 +155,7 @@
     margin-left: 8px;
     font-size: 32px;
     resize: none;
-    height: 20vh;
+    height: 200px;
   }
 
   .firma {
@@ -179,10 +178,9 @@
     margin-top: 2em;
     margin-left: 16px;
     font-size: 20px;
-    height: 120vh;
+    height: 300px;
     resize: none;
     overflow: hidden;
-    min-height: 50px;
     white-space: break-spaces;
   }
 

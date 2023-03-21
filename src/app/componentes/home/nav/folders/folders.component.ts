@@ -24,7 +24,6 @@ export class FoldersComponent {
   faEdit = faPenToSquare; faShare = faShare; faClose = faClose; faLink = faShareNodes;
   faDownload = faDownload;
 
-  // #TODO Token usuario
   token: string = localStorage.getItem('token');
   user: User;
   folders:Array<Folder>;
