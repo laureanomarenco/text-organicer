@@ -21,6 +21,7 @@ import { PublicNavComponent } from './componentes/public/public-nav/public-nav.c
 import { PublicTextComponent } from './componentes/public/public-text/public-text.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {AppRoutingModule} from "./app-routing.module";
+import { AutoresizeDirective } from './directivas/autoresize.directive';
 
 
 
@@ -38,7 +39,8 @@ import {AppRoutingModule} from "./app-routing.module";
     CompartidasComponent,
     PublicComponent,
     PublicNavComponent,
-    PublicTextComponent
+    PublicTextComponent,
+    AutoresizeDirective
   ],
   imports: [
     BrowserModule,

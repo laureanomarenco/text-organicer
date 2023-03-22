@@ -9,6 +9,7 @@
     (blur)="onChange($event)">
 
   <textarea
+    autoresize
     type="text"
     class="subtitulo"
     [(ngModel)]="page.subtitulo"
@@ -24,11 +25,11 @@
     (keyup)="onChange($event)"
     (blur)="onChange($event)">
 
-  <textarea #contenidoArea
+  <textarea
+    autoresize
     id="textarea"
     class="contenido"
     [(ngModel)]="page.contenido"
-    (input)="resizeTextarea($event.target)"
     value={{page.contenido}}
     (keyup)="onChange($event)"
     (blur)="onChange($event)"></textarea>

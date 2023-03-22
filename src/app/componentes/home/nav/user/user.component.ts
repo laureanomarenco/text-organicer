@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import {DataUserPrivateService} from "../../../../servicios/fetchs/data-user-private.service";
 import {UserPrivate} from "../../../../modelos/userPrivate";
 import {Router} from "@angular/router";
-import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-user',
@@ -24,7 +23,7 @@ export class UserComponent {
   constructor(
     private router: Router,
     private service:DataUserService,
-    private serviceUserPrivate:DataUserPrivateService
+    private serviceUserPrivate:DataUserPrivateService,
 
   ) {}
 
@@ -47,24 +46,6 @@ export class UserComponent {
           }
         }
       })
-
-    // this.service
-    //   .getById(this.userID)
-    //   .subscribe({
-    //       next: res => {
-    //         this.user = res.data as User
-    //       },
-    //     error: (err: HttpErrorResponse) => {
-    //       if (err.error instanceof Error) {
-    //         console.log('Error de cliente o red', err.error.message);
-    //         Swal.fire('Error de cliente o red', '', 'error');
-    //       } else {
-    //         console.log('Error en el servidor remoto', err.error.message);
-    //         Swal.fire('Error en el servidor', '', 'error');
-    //       }
-    //     }
-    //     }
-    //   )
 
     if(window.innerWidth > 600){
       const bars = document.querySelector('#bars')
@@ -118,7 +99,7 @@ export class UserComponent {
     let usUp: User = {
       id: this.user.id,
       username: formularioUpdateUser.value.username,
-      imagen: "http://",
+      imagen: formularioUpdateUser.value.imagen,
       token: this.token,
     }
 

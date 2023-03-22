@@ -26,8 +26,10 @@ export class FoldersService {
         .getByFolderId(id)
         .subscribe(res => {
           this.pages = res.data as Page[]
+          const nav = document.querySelector('#aside')
+          nav.classList.remove('open')
+          this.open = id
         })
-      this.open = id
     }
   }
 
@@ -50,8 +52,7 @@ export class FoldersService {
   }
 
   selectPage(id: number){
-    const nav = document.querySelector('#aside')
-    nav.classList.remove('open')
+
 
     this.pSelect.setSelectedPage(id)
   }

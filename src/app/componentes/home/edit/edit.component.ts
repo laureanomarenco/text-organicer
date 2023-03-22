@@ -21,7 +21,11 @@ export class EditComponent {
     titulo: "¡Bienvenido!",
     subtitulo: "Crea tus carpetas. \nEditá y organizá tus textos.",
     firma: "textOrganicer",
-    contenido: "Navega y crea tus carpetas \nEdita tus textos \nComparte"
+    contenido: "- Crea tus carpetas y páginas. " +
+      "\n\n- Edita y organiza tus textos. " +
+      "\n\n- Compartilos con quien quieras. " +
+      "\n\n- Colaborá con tus compañeros. " +
+      "\n\n- Descargá tus carpetas en PDF."
   };
 
 

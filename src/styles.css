@@ -121,7 +121,7 @@
     width: 20%;
     height: 100%;
     background-color: var(--navBackground);
-    padding: 2em 1.2em;
+    padding: 2em 1.5em;
     position: fixed;
     overflow: auto;
     box-shadow: -7px -1px 32px 0px rgba(0,0,0,0.61);
@@ -155,7 +155,6 @@
     margin-left: 8px;
     font-size: 32px;
     resize: none;
-    height: 200px;
   }
 
   .firma {

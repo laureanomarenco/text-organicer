@@ -1,5 +1,5 @@
 <div class="user d-flex justify-content-between">
-  <p (click)="userModal()">{{ user.username }}</p>
+    <p class="pointer" (click)="userModal()">{{ user.username }}</p>
   <div *ngIf="modal" class="user-modal-background">
 
     <div class="d-flex justify-content-between">
@@ -14,7 +14,7 @@
     <div *ngIf="modalEdit" class="m-4">
       <p (click)="logOut()" class="mt-2 pointer">Log out</p>
       <p (click)="modalEdit = false; modalPass = false; modalData = true" class="pointer">Editar usuario</p>
-      <p (click)="modalEdit = false; modalEdit = false; modalPass = true">Cambiar contraseña</p>
+      <p (click)="modalEdit = false; modalEdit = false; modalPass = true" class="pointer">Cambiar contraseña</p>
     </div>
 
     <!-- EDIT USER -->
@@ -38,6 +38,13 @@
              required
       />
 
+      <input #imagenControl="ngModel"
+             class="mt-2"
+             type="text"
+             name="imagen"
+             [(ngModel)]="user.imagen"
+             value="{{user.imagen}}"
+      />
       <button type="submit" class="mt-2">Actualizar</button>
     </form>
 

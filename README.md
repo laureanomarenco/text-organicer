@@ -1,27 +1,23 @@
 # TextOrganicer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+TextOrganicer es una aplicación web dedicada a servir como organizador personal de texto, permitiendo las funciones extra de compartir el acceso a la edición con otros usuarios de la aplicación o compartir un link público de tus carpetas.
 
-## Development server
+En este repositorio podrás encontrar el frontend de la aplicación, construido con Angular 15.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+La estructura general de componentes está dividida en:
+- "landing", que contiene todo lo relativo al inicio de sesión y registro.
+- "home", con todo lo relativo a las carpetas, páginas, y edición del usuario logeado.
+- "public", como template para las carpetas públicas.
 
-## Code scaffolding
+Respecto a las entidades que se manejan en la aplicación tenemos una carpeta para las respuestas del backend, que contienen los distintos mensajes de respuesta como status, message, y la data correspondiente a cada objeto solicitado. Y además tenemos los modelos que corresponden a los objetos:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Folder
+- Page
+- Role
+- User
+- UserPrivate
 
-## Build
+En cuanto a los servicios hay una carpeta fetchs que contiene un servicio con los métodos CRUD relativos a cada endpoint del backend. Y además algunos servicios funcionales. El endopoint de acceso al backend está en la carpeta config para poder modificarlo facilmente.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+También hay una carpeta utils para almacenar diversas utilidades como las constantes de roleTypes. Una carpeta validaciones que por ahora solo tiene la validación de que dos password son iguales. Y también hay una carpeta directivas que contiene la directiva de autoresize para los textarea.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

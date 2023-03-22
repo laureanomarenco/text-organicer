@@ -19,6 +19,7 @@ export class EditService {
 
   setSelectedPage(id: number) {
     this.dataPageService.getById(id).subscribe(res => {
+
       this.pageSelected.emit(res.data as Page)
     })
   }
