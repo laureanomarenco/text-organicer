@@ -24,10 +24,11 @@
     (keyup)="onChange($event)"
     (blur)="onChange($event)">
 
-  <textarea
-    autosize
+  <textarea #contenidoArea
+    id="textarea"
     class="contenido"
     [(ngModel)]="page.contenido"
+    (input)="resizeTextarea($event.target)"
     value={{page.contenido}}
     (keyup)="onChange($event)"
     (blur)="onChange($event)"></textarea>

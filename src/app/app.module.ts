@@ -21,7 +21,6 @@ import { PublicNavComponent } from './componentes/public/public-nav/public-nav.c
 import { PublicTextComponent } from './componentes/public/public-text/public-text.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {AppRoutingModule} from "./app-routing.module";
-import {TextareaAutosizeModule} from "ngx-textarea-autosize";
 
 
 
@@ -48,8 +47,7 @@ import {TextareaAutosizeModule} from "ngx-textarea-autosize";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgImageSliderModule,
-    TextareaAutosizeModule
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

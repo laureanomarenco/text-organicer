@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Page} from "../../../modelos/page";
 import {EditService} from "../../../servicios/edit.service";
 import {DataPageService} from "../../../servicios/fetchs/data-page.service";
@@ -24,20 +24,26 @@ export class EditComponent {
     contenido: "Navega y crea tus carpetas \nEdita tus textos \nComparte"
   };
 
+
   constructor(
     private pageService: DataPageService,
     private pService: EditService
 
   ) {
+
     this.pService.pageSelected.subscribe(res => {
       this.page = res;
     })
   }
 
   ngOnInit():void {
+
   }
 
 
+  resizeTextarea(element) {
+    element.style.height=(element.scrollHeight)+"px";
+  }
 
   onChange(event: any) {
     if((event.type === 'blur' || event.key === 'Enter') && this.page.id !== 0){
