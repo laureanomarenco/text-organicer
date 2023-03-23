@@ -99,7 +99,7 @@ export class UserComponent {
     let usUp: User = {
       id: this.user.id,
       username: formularioUpdateUser.value.username,
-      imagen: formularioUpdateUser.value.imagen,
+      imagen: null,
       token: this.token,
     }
 
