@@ -7,7 +7,6 @@ import {User} from "../../../modelos/user";
 import {UserPrivate} from "../../../modelos/userPrivate";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
-import * as CryptoJS from 'crypto-js';
 import {ActivatedRoute, Router} from "@angular/router";
 
 
@@ -41,14 +40,14 @@ export class RegisterComponent {
       password: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(20),
-        // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/)
+        Validators.maxLength(32),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*?[!#%&_$@?¿¡])[A-Za-z0-9!#%&_$@?¿¡]{8,32}$/)
       ])],
       passwordAgain: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(20),
-        // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/)
+        Validators.maxLength(32),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*?[!#%&_$@?¿¡])[A-Za-z0-9!#%&_$@?¿¡]{8,32}$/)
       ])]
 
     })

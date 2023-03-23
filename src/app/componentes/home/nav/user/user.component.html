@@ -29,47 +29,70 @@
              maxlength="20"
              required
       />
+
+      <div *ngIf="usernameControl.invalid && (usernameControl.dirty || usernameControl.touched)" class="text-danger">
+        <p *ngIf="usernameControl.errors?.['required']">Campo requerido</p>
+        <p *ngIf="usernameControl.errors?.['minlength']">Al menos 4 caracteres</p>
+        <p *ngIf="usernameControl.errors?.['maxlength']">Máximo 20 caracteres</p>
+      </div>
+
       <input #mailControl="ngModel"
              class="mt-2"
              type="email"
              name="mail"
              [(ngModel)]="userPrivate.mail"
              value="{{userPrivate.mail}}"
+             email
              required
       />
 
-      <input #imagenControl="ngModel"
-             class="mt-2"
-             type="text"
-             name="imagen"
-             [(ngModel)]="user.imagen"
-             value="{{user.imagen}}"
-      />
-      <button type="submit" class="mt-2">Actualizar</button>
+      <div *ngIf="mailControl.invalid && (mailControl.dirty || mailControl.touched)" class="text-danger">
+        <p *ngIf="mailControl.errors?.['required']">Campo requerido</p>
+        <p *ngIf="mailControl.errors?.['email']">Debe ser un email</p>
+      </div>
+
+      <button [disabled]="formularioUpdateUser.invalid" type="submit" class="mt-2">Actualizar</button>
     </form>
 
     <!-- CHANGE PASS -->
-    <form *ngIf="modalPass" #formulacioChangePass="ngForm" autocomplete="off" (ngSubmit)="changePass(formulacioChangePass)">
+    <form *ngIf="modalPass" #formularioChangePass="ngForm" autocomplete="off" (ngSubmit)="changePass(formularioChangePass)">
       <input #passControl="ngModel"
              class="mt-2"
              type="password"
              name="password"
              [(ngModel)]="password"
              minlength="8"
-             maxlength="20"
+             maxlength="32"
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*?[!#%&_$@?¿¡])[A-Za-z0-9!#%&_$@?¿¡]{8,32}$"
              required
       />
 
-      <input #passControl="ngModel"
+      <div *ngIf="passControl.invalid && (passControl.dirty || passControl.touched)" class="text-danger">
+        <p *ngIf="passControl.errors?.['required']">Campo requerido</p>
+        <p *ngIf="passControl.errors?.['minlength']">Al menos 4 caracteres</p>
+        <p *ngIf="passControl.errors?.['maxlength']">Máximo 32 caracteres</p>
+        <p *ngIf="passControl.errors?.['pattern']">Al menos una minuscula, una mayuscula, un número y un caracter especial</p>
+      </div>
+
+      <input #passControl2="ngModel"
              class="mt-2"
              type="password"
              name="passAgain"
              [(ngModel)]="passAgain"
              minlength="8"
-             maxlength="20"
+             maxlength="32"
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*?[!#%&_$@?¿¡])[A-Za-z0-9!#%&_$@?¿¡]{8,32}$"
              required
       />
-    <button type="submit" class="mt-2">Cambiar</button>
+
+      <div *ngIf="passControl2.invalid && (passControl2.dirty || passControl2.touched)" class="text-danger">
+        <p *ngIf="passControl2.errors?.['required']">Campo requerido</p>
+        <p *ngIf="passControl2.errors?.['minlength']">Al menos 4 caracteres</p>
+        <p *ngIf="passControl2.errors?.['maxlength']">Máximo 32 caracteres</p>
+        <p *ngIf="passControl2.errors?.['pattern']">Al menos una minuscula, una mayuscula, un número y un caracter especial</p>
+      </div>
+
+    <button [disabled]="formularioChangePass.invalid" type="submit" class="mt-2">Cambiar</button>
     </form>
 
 
