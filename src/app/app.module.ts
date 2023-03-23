@@ -22,6 +22,7 @@ import { PublicTextComponent } from './componentes/public/public-text/public-tex
 import { NgImageSliderModule } from 'ng-image-slider';
 import {AppRoutingModule} from "./app-routing.module";
 import { AutoresizeDirective } from './directivas/autoresize.directive';
+import {EditorModule} from "@tinymce/tinymce-angular";
 
 
 
@@ -49,7 +50,8 @@ import { AutoresizeDirective } from './directivas/autoresize.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

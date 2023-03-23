@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../../../validaciones/equalPass.validator";
-import {DataUserService} from "../../../servicios/fetchs/data-user.service";
-import {DataUserPrivateService} from "../../../servicios/fetchs/data-user-private.service";
+import {DataUserService} from "../../../servicios/data/data-user.service";
+import {DataUserPrivateService} from "../../../servicios/data/data-user-private.service";
 import {User} from "../../../modelos/user";
 import {UserPrivate} from "../../../modelos/userPrivate";
 import {HttpErrorResponse} from "@angular/common/http";

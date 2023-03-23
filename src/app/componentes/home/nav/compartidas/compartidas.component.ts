@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
+import {DataCollaboratorsService} from "../../../../servicios/data/data-collaborators.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {Folder} from "../../../../modelos/folder";
-import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
+import {DataFolderService} from "../../../../servicios/data/data-folder.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import { faEllipsisVertical,  faTrashCan, faClose } from "@fortawesome/free-solid-svg-icons";
 import {Role} from "../../../../modelos/role";
 import {Router} from "@angular/router";
 import {User} from "../../../../modelos/user";
-import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
+import {DataUserService} from "../../../../servicios/data/data-user.service";
 
 @Component({
   selector: 'app-compartidas',

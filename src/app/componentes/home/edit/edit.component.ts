@@ -1,10 +1,10 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Page} from "../../../modelos/page";
 import {EditService} from "../../../servicios/edit.service";
-import {DataPageService} from "../../../servicios/fetchs/data-page.service";
+import {DataPageService} from "../../../servicios/data/data-page.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
-
+import {tiny_api_key} from "../../../config/constants";
 
 @Component({
   selector: 'app-edit',
@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent {
-
+  tiny_api_key:string = tiny_api_key;
 
   page: Page = {
     id: 0,
@@ -34,7 +34,6 @@ export class EditComponent {
     private pService: EditService
 
   ) {
-
     this.pService.pageSelected.subscribe(res => {
       this.page = res;
     })

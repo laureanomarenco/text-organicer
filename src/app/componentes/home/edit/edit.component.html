@@ -25,13 +25,13 @@
     (keyup)="onChange($event)"
     (blur)="onChange($event)">
 
-  <textarea
+  <editor
+    apiKey="{{tiny_api_key}}"
     autoresize
     id="textarea"
     class="contenido"
     [(ngModel)]="page.contenido"
-    value={{page.contenido}}
     (keyup)="onChange($event)"
-    (blur)="onChange($event)"></textarea>
+    (blur)="onChange($event)"></editor>
+<!--    value={{page.contenido}}-->
 </div>
-

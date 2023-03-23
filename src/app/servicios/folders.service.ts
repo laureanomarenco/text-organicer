@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DataPageService} from "./fetchs/data-page.service";
+import {DataPageService} from "./data/data-page.service";
 import {Page} from "../modelos/page";
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { faEllipsisVertical, faPlus, faTrashCan, faPenToSquare, faShare, faClose, faShareNodes, faDownload } from "@fortawesome/free-solid-svg-icons";
 import {Folder} from "../../../../modelos/folder";
-import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
-import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
+import {DataFolderService} from "../../../../servicios/data/data-folder.service";
+import {DataUserService} from "../../../../servicios/data/data-user.service";
 import Swal from 'sweetalert2'
 import {EditService} from "../../../../servicios/edit.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Role} from "../../../../modelos/role";
-import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
+import {DataCollaboratorsService} from "../../../../servicios/data/data-collaborators.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
 import {COLLABORATOR, OWNER} from "../../../../utils/roleTypes";

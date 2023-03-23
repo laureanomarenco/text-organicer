@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {User} from "../modelos/user";
 import {Router} from "@angular/router";
-import {DataUserService} from "./fetchs/data-user.service";
-import {DataUserPrivateService} from "./fetchs/data-user-private.service";
+import {DataUserService} from "./data/data-user.service";
+import {DataUserPrivateService} from "./data/data-user-private.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 

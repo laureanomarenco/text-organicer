@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
+import {DataUserService} from "../../../../servicios/data/data-user.service";
 import {User} from "../../../../modelos/user";
 import {HttpErrorResponse} from "@angular/common/http";
 import {faBars, faClose} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import {DataUserPrivateService} from "../../../../servicios/fetchs/data-user-private.service";
+import {DataUserPrivateService} from "../../../../servicios/data/data-user-private.service";
 import {UserPrivate} from "../../../../modelos/userPrivate";
 import {Router} from "@angular/router";
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {ActivatedRoute, Router} from "@angular/router";
-import {DataUserPrivateService} from "../../../servicios/fetchs/data-user-private.service";
+import {DataUserPrivateService} from "../../../servicios/data/data-user-private.service";
 import {UserPrivate} from "../../../modelos/userPrivate";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";

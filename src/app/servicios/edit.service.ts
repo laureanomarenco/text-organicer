@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Page} from "../modelos/page";
 import {HttpClient} from "@angular/common/http";
-import {DataPageService} from "./fetchs/data-page.service";
+import {DataPageService} from "./data/data-page.service";
 import Swal from "sweetalert2";
 
 @Injectable({
