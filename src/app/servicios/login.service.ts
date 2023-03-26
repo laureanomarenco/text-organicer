@@ -30,7 +30,7 @@ export class LoginService {
             Swal.fire('Error de cliente o red', '', 'error');
 
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
+            console.log('Error en el servidor remoto', err.error.mensaje);
             Swal.fire('Error en el servidor', '', 'error');
             this.router.navigate(['/landing'])
 

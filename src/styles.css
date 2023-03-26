@@ -193,7 +193,8 @@
 
   .landing-form-div {
     text-align: center;
-    margin: 4em auto;
+    margin: auto;
+    margin-top: 1em;
     padding: 2em;
     background-color: var(--landingBg);
     width: 50vw;
@@ -326,4 +327,8 @@
 
 .hidden {
   display: none;
+}
+
+.border-sub {
+  border-bottom: 1px solid black;
 }

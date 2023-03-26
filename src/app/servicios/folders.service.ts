@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {DataPageService} from "./fetchs/data-page.service";
 import {Page} from "../modelos/page";
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
-import {EditService} from "./edit.service";
 import * as jsPDF from 'jspdf'
-import {Folder} from "../modelos/folder";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoldersService {
-  pages:Array<Page>;
+  pages: Page[];
+  pageSelected: EventEmitter<Page> = new EventEmitter<Page>()
+
 
   constructor(
-    private servicePage:DataPageService,
-    private pSelect: EditService
+    private servicePage:DataPageService
   ) { }
 
   open:number;
@@ -52,10 +51,11 @@ export class FoldersService {
   }
 
   selectPage(id: number){
-
-
-    this.pSelect.setSelectedPage(id)
+    this.servicePage.getById(id).subscribe(res => {
+      this.pageSelected.emit(res.data as Page)
+    })
   }
+
   borrarPagina(id: number) {
     Swal.fire({
       title: 'Estás seguro que querés eliminar esta página?',
@@ -74,7 +74,7 @@ export class FoldersService {
                 console.log('Error de cliente o red', err.error.message);
                 Swal.fire('Error de cliente o red', '', 'error');
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
+                console.log('Error en el servidor remoto', err.error.mensaje);
                 Swal.fire('Error en el servidor', '', 'error');
               }
             }
@@ -104,7 +104,7 @@ export class FoldersService {
             console.log('Error de cliente o red', err.error.message);
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
+            console.log('Error en el servidor remoto', err.error.mensaje);
             Swal.fire('Error en el servidor', '', 'error');
           }
         }

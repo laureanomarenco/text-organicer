@@ -4,15 +4,13 @@ import {Folder} from "../../../../modelos/folder";
 import {DataFolderService} from "../../../../servicios/fetchs/data-folder.service";
 import {DataUserService} from "../../../../servicios/fetchs/data-user.service";
 import Swal from 'sweetalert2'
-import {EditService} from "../../../../servicios/edit.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Role} from "../../../../modelos/role";
 import {DataCollaboratorsService} from "../../../../servicios/fetchs/data-collaborators.service";
 import {FoldersService} from "../../../../servicios/folders.service";
 import {Router} from "@angular/router";
-import {COLLABORATOR, OWNER} from "../../../../utils/roleTypes";
+import {RoleType} from "../../../../utils/roleTypes";
 import {User} from "../../../../modelos/user";
-import {LocalizedString} from "@angular/compiler";
 
 @Component({
   selector: 'app-folders',
@@ -26,7 +24,7 @@ export class FoldersComponent {
 
   token: string = localStorage.getItem('token');
   user: User;
-  folders:Array<Folder>;
+  folders: Folder[];
 
   constructor(
     private router: Router,
@@ -51,32 +49,13 @@ export class FoldersComponent {
               Swal.fire('Error de cliente o red', '', 'error');
 
             } else {
-              console.log('Error en el servidor remoto', err.error.message);
+              console.log('Error en el servidor remoto', err.error.mensaje);
               this.router.navigate(['/landing'])
               Swal.fire('Error en el servidor', '', 'error');
 
             }
           }
         })
-      // this.serviceFolder
-      //   .getAllFoldersOfUser(this.userID)
-      //     .subscribe({
-      //       next: res => {
-      //       this.folders = res.data as Folder[]
-      //       console.log(this.folders)
-      //       },
-      //       error: (err: HttpErrorResponse) => {
-      //         if (err.error instanceof Error) {
-      //           console.log('Error de cliente o red', err.error.message);
-      //           Swal.fire('Error de cliente o red', '', 'error');
-      //
-      //         } else {
-      //           console.log('Error en el servidor remoto', err.error.message);
-      //           Swal.fire('Error en el servidor', '', 'error');
-      //
-      //         }
-      //       }
-      //     })
       } else this.router.navigate(['/landing'])
   }
 
@@ -111,7 +90,7 @@ export class FoldersComponent {
               this.folders.push(data)
 
               let role : Role = {
-                role_type: OWNER
+                role_type: RoleType.OWNER
               }
 
               this.collaboratorService.addCollaborator(role, this.user.id, data.id)
@@ -124,8 +103,8 @@ export class FoldersComponent {
                       console.log('Error de cliente o red', err.error.message);
                       Swal.fire('Error de cliente o red', '', 'error');
                     } else {
-                      console.log('Error en el servidor remoto', err.error.message);
-                      Swal.fire('Error en el servidor', '', 'error');
+                      console.log('Error en el servidor remoto', err.error.mensaje);
+                      Swal.fire(err.error.mensaje, '', 'error');
                     }
                   }
                 })
@@ -135,8 +114,8 @@ export class FoldersComponent {
                 console.log('Error de cliente o red', err.error.message);
                 Swal.fire('Error de cliente o red', '', 'error');
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
-                Swal.fire('Error en el servidor', '', 'error');
+                console.log('Error en el servidor remoto', err.error.mensaje);
+                Swal.fire(err.error.mensaje, '', 'error');
               }
             }
           })
@@ -164,8 +143,8 @@ export class FoldersComponent {
                 console.log('Error de cliente o red', err.error.message);
                 Swal.fire('Error de cliente o red', '', 'error');
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
-                Swal.fire('Error en el servidor', '', 'error');
+                console.log('Error en el servidor remoto', err.error.mensaje);
+                Swal.fire(err.error.mensaje, '', 'error');
               }
             }
         })
@@ -212,8 +191,8 @@ export class FoldersComponent {
                 console.log('Error de cliente o red', err.error.message);
                 Swal.fire('Error de cliente o red', '', 'error');
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
-                Swal.fire('Error en el servidor', '', 'error');
+                console.log('Error en el servidor remoto', err.error.mensaje);
+                Swal.fire(err.error.mensaje, '', 'error');
               }
             }
           })
@@ -250,7 +229,7 @@ export class FoldersComponent {
               let id_folder = idFolder;
 
               let colaborador:Role = {
-                role_type: COLLABORATOR
+                role_type: RoleType.COLLABORATOR
               }
 
               this.collaboratorService.getAllByFolderId(id_folder)
@@ -273,8 +252,8 @@ export class FoldersComponent {
                               console.log('Error de cliente o red', err.error.message);
                               Swal.fire('Error de cliente o red', '', 'error');
                             } else {
-                              console.log('Error en el servidor remoto', err.error.message);
-                              Swal.fire('Error en el servidor', '', 'error');
+                              console.log('Error en el servidor remoto', err.error.mensaje);
+                              Swal.fire(err.error.mensaje, '', 'error');
                             }
                           }
                         })
@@ -288,8 +267,8 @@ export class FoldersComponent {
                       console.log('Error de cliente o red', err.error.message);
                       Swal.fire('Error de cliente o red', '', 'error');
                     } else {
-                      console.log('Error en el servidor remoto', err.error.message);
-                      Swal.fire('Error en el servidor', '', 'error');
+                      console.log('Error en el servidor remoto', err.error.mensaje);
+                      Swal.fire(err.error.mensaje, '', 'error');
                     }
                   }
                 })
@@ -300,7 +279,7 @@ export class FoldersComponent {
                 this.foldersService.modalFolder = null;
                 Swal.fire('Error de cliente o red', '', 'error');
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
+                console.log('Error en el servidor remoto', err.error.mensaje);
                 Swal.fire('Error en el servidor', '', 'error');
               }
             }
@@ -334,8 +313,8 @@ export class FoldersComponent {
                   this.foldersService.modalFolder = null;
                   Swal.fire('Error de cliente o red', '', 'error');
                 } else {
-                  console.log('Error en el servidor remoto', err.error.message);
-                  Swal.fire('Error en el servidor', '', 'error');
+                  console.log('Error en el servidor remoto', err.error.mensaje);
+                  Swal.fire(err.error.mensaje, '', 'error');
                 }
               }
             })
@@ -346,8 +325,8 @@ export class FoldersComponent {
             this.foldersService.modalFolder = null;
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
+            console.log('Error en el servidor remoto', err.error.mensaje);
+            Swal.fire(err.error.mensaje, '', 'error');
           }
         }
       })

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Page} from "../../../modelos/page";
-import {EditService} from "../../../servicios/edit.service";
+import {FoldersService} from "../../../servicios/folders.service";
 
 
 @Component({
@@ -21,7 +21,7 @@ export class PublicTextComponent {
   };
 
   constructor(
-    private pService: EditService
+    private pService: FoldersService
 
   ){
     this.pService.pageSelected.subscribe(res => {

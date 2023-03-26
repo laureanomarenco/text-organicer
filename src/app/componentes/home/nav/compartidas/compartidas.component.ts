@@ -23,7 +23,7 @@ export class CompartidasComponent {
   folders: Array<Folder> = [];
   user: User;
 
-  //#TODO BLOQUEAR EDICIÓN DOBLE
+  //#TODO Implementar socket.io para permitir la actualización en tiempo real de los cambios en db para todos los usuarios que estén editando la página en el momento.
   constructor(
     private router: Router,
     private userService: DataUserService,
@@ -52,8 +52,8 @@ export class CompartidasComponent {
                             console.log('Error de cliente o red', err.error.message);
                             Swal.fire('Error de cliente o red', '', 'error');
                           } else {
-                            console.log('Error en el servidor remoto', err.error.message);
-                            Swal.fire('Error en el servidor', '', 'error');
+                            console.log('Error en el servidor remoto', err.error.mensaje);
+                            Swal.fire(err.error.mensaje, '', 'error');
                             this.router.navigate(['/landing'])
 
                           }
@@ -67,8 +67,8 @@ export class CompartidasComponent {
                     Swal.fire('Error de cliente o red', '', 'error');
 
                   } else {
-                    console.log('Error en el servidor remoto', err.error.message);
-                    Swal.fire('Error en el servidor', '', 'error');
+                    console.log('Error en el servidor remoto', err.error.mensaje);
+                    Swal.fire(err.error.mensaje, '', 'error');
 
                   }
                 }
@@ -81,8 +81,8 @@ export class CompartidasComponent {
               Swal.fire('Error de cliente o red', '', 'error');
 
             } else {
-              console.log('Error en el servidor remoto', err.error.message);
-              Swal.fire('Error en el servidor', '', 'error');
+              console.log('Error en el servidor remoto', err.error.mensaje);
+              Swal.fire(err.error.mensaje, '', 'error');
 
             }
           }
@@ -112,8 +112,8 @@ export class CompartidasComponent {
                       Swal.fire('Error de cliente o red', '', 'error');
 
                     } else {
-                      console.log('Error en el servidor remoto', err.error.message);
-                      Swal.fire('Error en el servidor', '', 'error');
+                      console.log('Error en el servidor remoto', err.error.mensaje);
+                      Swal.fire(err.error.mensaje, '', 'error');
 
                     }
                   }
@@ -125,8 +125,8 @@ export class CompartidasComponent {
                 Swal.fire('Error de cliente o red', '', 'error');
 
               } else {
-                console.log('Error en el servidor remoto', err.error.message);
-                Swal.fire('Error en el servidor', '', 'error');
+                console.log('Error en el servidor remoto', err.error.mensaje);
+                Swal.fire(err.error.mensaje, '', 'error');
 
               }
             }

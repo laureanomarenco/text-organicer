@@ -1,2 +1,4 @@
-export const COLLABORATOR = "collaborator";
-export const OWNER = "owner"
+export enum RoleType {
+  COLLABORATOR = "collaborator",
+  OWNER = "owner"
+}

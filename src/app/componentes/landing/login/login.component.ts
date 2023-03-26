@@ -5,7 +5,6 @@ import {DataUserPrivateService} from "../../../servicios/fetchs/data-user-privat
 import {UserPrivate} from "../../../modelos/userPrivate";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
-import * as CryptoJS from 'crypto-js';
 import {User} from "../../../modelos/user";
 
 @Component({
@@ -60,10 +59,10 @@ export class LoginComponent {
         },
         error: (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
-            console.log('Error de cliente o red', );
+            console.log('Error de cliente o red', err.error.message );
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            Swal.fire(err.error.message, '', 'error');
+            Swal.fire(err.error.mensaje, '', 'error');
           }
         }
       })

@@ -9,7 +9,7 @@ La estructura general de componentes está dividida en:
 - "home", con todo lo relativo a las carpetas, páginas, y edición del usuario logeado.
 - "public", como template para las carpetas públicas.
 
-Respecto a las entidades que se manejan en la aplicación tenemos una carpeta para las respuestas del backend, que contienen los distintos mensajes de respuesta como status, message, y la data correspondiente a cada objeto solicitado. Y además tenemos los modelos que corresponden a los objetos:
+Respecto a las entidades que se manejan en la aplicación tenemos una carpeta para las respuestas del backend, que contienen los distintos mensajes de respuesta como status, mensaje, y la data correspondiente a cada objeto solicitado. Y además tenemos los modelos que corresponden a los objetos:
 
 - Folder
 - Page

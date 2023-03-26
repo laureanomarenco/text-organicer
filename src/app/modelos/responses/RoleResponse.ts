@@ -4,5 +4,5 @@ export interface RoleResponse {
   success: boolean;
   data: Role | Role[];
   status?: number;
-  message?: string;
+  mensaje?: string;
 }

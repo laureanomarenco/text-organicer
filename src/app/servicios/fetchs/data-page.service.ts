@@ -5,7 +5,6 @@ import {Page} from "../../modelos/page";
 import {url} from "../../config/constants";
 import {PageResponse} from "../../modelos/responses/PageResponse";
 
-// #TODO Excepciones servidor caído
 @Injectable({
   providedIn: 'root'
 })

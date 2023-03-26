@@ -61,7 +61,7 @@ export class DataCollaboratorsService {
                     console.log('Error de cliente o red', err.error.message);
                     Swal.fire('Error de cliente o red', '', 'error');
                   } else {
-                    console.log('Error en el servidor remoto', err.error.message);
+                    console.log('Error en el servidor remoto', err.error.mensaje);
                     Swal.fire('Error en el servidor', '', 'error');
                   }
                 }
@@ -74,7 +74,7 @@ export class DataCollaboratorsService {
             console.log('Error de cliente o red', err.error.message);
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
+            console.log('Error en el servidor remoto', err.error.mensaje);
             Swal.fire('Error en el servidor', '', 'error');
           }
         }

@@ -19,6 +19,7 @@
 
     <!-- EDIT USER -->
     <form *ngIf="modalData" #formularioUpdateUser="ngForm" autocomplete="off" (ngSubmit)="updateUser(formularioUpdateUser)">
+      <p>Usuario</p>
       <input #usernameControl="ngModel"
              class="mt-2"
              type="text"
@@ -36,6 +37,7 @@
         <p *ngIf="usernameControl.errors?.['maxlength']">Máximo 20 caracteres</p>
       </div>
 
+      <p>Email</p>
       <input #mailControl="ngModel"
              class="mt-2"
              type="email"
@@ -56,6 +58,7 @@
 
     <!-- CHANGE PASS -->
     <form *ngIf="modalPass" #formularioChangePass="ngForm" autocomplete="off" (ngSubmit)="changePass(formularioChangePass)">
+      <p>Nueva contraseña</p>
       <input #passControl="ngModel"
              class="mt-2"
              type="password"
@@ -74,6 +77,7 @@
         <p *ngIf="passControl.errors?.['pattern']">Al menos una minuscula, una mayuscula, un número y un caracter especial</p>
       </div>
 
+      <p>Ingrese nuevamente</p>
       <input #passControl2="ngModel"
              class="mt-2"
              type="password"

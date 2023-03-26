@@ -39,8 +39,8 @@ export class UserComponent {
             Swal.fire('Error de cliente o red', '', 'error');
 
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
+            console.log('Error en el servidor remoto', err.error.mensaje);
+            Swal.fire(err.error.mensaje, '', 'error');
             this.router.navigate(['/landing'])
 
           }
@@ -76,8 +76,8 @@ export class UserComponent {
               console.log('Error de cliente o red', err.error.message);
               Swal.fire('Error de cliente o red', '', 'error');
             } else {
-              console.log('Error en el servidor remoto', err.error.message);
-              Swal.fire('Error en el servidor', '', 'error');
+              console.log('Error en el servidor remoto', err.error.mensaje);
+              Swal.fire(err.error.mensaje, '', 'error');
             }
           }
         })
@@ -113,8 +113,8 @@ export class UserComponent {
             console.log('Error de cliente o red', err.error.message);
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
+            console.log('Error en el servidor remoto', err.error.mensaje);
+            Swal.fire(err.error.mensaje, '', 'error');
           }
         }
       })
@@ -136,8 +136,8 @@ export class UserComponent {
             console.log('Error de cliente o red', err.error.message);
             Swal.fire('Error de cliente o red', '', 'error');
           } else {
-            console.log('Error en el servidor remoto', err.error.message);
-            Swal.fire('Error en el servidor', '', 'error');
+            console.log('Error en el servidor remoto', err.error.mensaje);
+            Swal.fire(err.error.mensaje, '', 'error');
           }
         }
       })
@@ -166,8 +166,8 @@ export class UserComponent {
               console.log('Error de cliente o red', err.error.message);
               Swal.fire('Error de cliente o red', '', 'error');
             } else {
-              console.log('Error en el servidor remoto', err.error.message);
-              Swal.fire('Error en el servidor', '', 'error');
+              console.log('Error en el servidor remoto', err.error.mensaje);
+              Swal.fire(err.error.mensaje, '', 'error');
             }
           }
         })

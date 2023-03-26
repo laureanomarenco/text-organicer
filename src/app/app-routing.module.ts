@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'publicfolder/:id', component: PublicComponent},
   {path: '', pathMatch: 'full', redirectTo: 'landing'},
+  {path: '**', redirectTo: 'landing'},
 ];
 
 @NgModule({
