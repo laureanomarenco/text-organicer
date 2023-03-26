@@ -1,5 +1,5 @@
 <div class="user d-flex justify-content-between">
-    <p class="pointer" (click)="userModal()">{{ user.username }}</p>
+    <p class="pointer" (click)="userModal()">{{ user?.username }}</p>
   <div *ngIf="modal" class="user-modal-background">
 
     <div class="d-flex justify-content-between">
