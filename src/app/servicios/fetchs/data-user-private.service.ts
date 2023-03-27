@@ -52,4 +52,8 @@ export class DataUserPrivateService {
     return this.http.post<any>(url + 'user_private/login', user, this.getHttpOptions())
   }
 
+  updateEmail(id: number, userPrivate: UserPrivate) {
+    return this.http
+      .patch<UserPrivateResponse>(url + 'user_private/' + id, userPrivate, this.getHttpOptions())
+  }
 }

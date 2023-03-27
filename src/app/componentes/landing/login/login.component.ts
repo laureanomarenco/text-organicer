@@ -21,7 +21,6 @@ export class LoginComponent {
     private formBuilder:FormBuilder,
     private router:Router,
     private dataUserPrivateService: DataUserPrivateService
-
   ) {
     this.formLogin = formBuilder.group({
       email: ['', Validators.compose([

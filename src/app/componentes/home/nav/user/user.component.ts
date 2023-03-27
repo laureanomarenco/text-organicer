@@ -17,13 +17,13 @@ export class UserComponent {
   faBars = faBars; faClose = faClose;
 
   token: string = localStorage.getItem('token');
-  user: User;
+  user: User | null = null;
   userPrivate: UserPrivate;
 
   constructor(
     private router: Router,
     private service:DataUserService,
-    private serviceUserPrivate:DataUserPrivateService,
+    private serviceUserPrivate:DataUserPrivateService
 
   ) {}
 
@@ -46,6 +46,7 @@ export class UserComponent {
           }
         }
       })
+
 
     if(window.innerWidth > 600){
       const bars = document.querySelector('#bars')
@@ -119,13 +120,11 @@ export class UserComponent {
         }
       })
 
-    let upUp: UserPrivate = {
+    let upUp: any = {
       id: this.userPrivate.id,
       mail: formularioUpdateUser.value.mail,
-      password: this.userPrivate.password,
-      user_id: this.user.id
     }
-    this.serviceUserPrivate.updateUserPrivate(this.userPrivate.id, this.userPrivate)
+    this.serviceUserPrivate.updateEmail(this.userPrivate.id, this.userPrivate)
       .subscribe({
         next: res => {
           this.userPrivate = res.data as UserPrivate
