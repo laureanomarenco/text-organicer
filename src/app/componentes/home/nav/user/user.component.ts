@@ -17,7 +17,7 @@ export class UserComponent {
   faBars = faBars; faClose = faClose;
 
   token: string = localStorage.getItem('token');
-  user: User | null = null;
+  user: User;
   userPrivate: UserPrivate;
 
   constructor(
@@ -41,7 +41,7 @@ export class UserComponent {
           } else {
             console.log('Error en el servidor remoto', err.error.mensaje);
             Swal.fire(err.error.mensaje, '', 'error');
-            this.router.navigate(['/landing'])
+            //this.router.navigate(['/landing'])
 
           }
         }
