@@ -23,7 +23,6 @@ export class RegisterComponent {
     private formBuilder:FormBuilder,
     private userService:DataUserService,
     private userPrivateService: DataUserPrivateService,
-
     private router: Router,
   ) {
     this.formRegister = formBuilder.group({
