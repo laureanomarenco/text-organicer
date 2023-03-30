@@ -1,1 +1,1 @@
-export const url:string = "http://localhost:8081/"
+export const url:string = "https://scenic-lane-382119.de.r.appspot.com/"
